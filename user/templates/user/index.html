@@ -1,0 +1,105 @@
+{% load static %}
+<DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="{% static 'user/style.css' %}" type="text/css"/>
+	<meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=0.4, user-scalable=no">
+	<title>Главная</title>
+</head>
+<body>
+	<header>
+		<section>
+			<div>
+				<img src="{% static 'user/headerlogo.svg' %}" style='height: 64px'/>
+				<h1>Направления</h1>
+			</div>
+			<button id='add-referral-btn' class='shadow' onclick="open_add_form()">
+				<img src="{% static 'user/plus.svg' %}" style='height: 120px'/>
+			</button>
+		</section>
+	</header>
+	<main>
+	{% for appointment in appointments %}
+		<div class='referral' style="background: url({% static 'user/referralbackground.svg' %}); background-size: cover;" onclick='more_info(this)'>
+			<h2 class='referral-header'>Запись</h2>
+			<h2 class='time'>{{ appointment.appointment_time|time:"H:i" }}</h2>
+			<h2 class='date'>{{ appointment.appointment_date|date:"j.m" }}</h2>
+			{% if appointment.doctor.profession == "Офтальмолог" %}
+				<img src="{% static 'user/ophtolmologist.svg' %}"/>
+			{% endif %}
+			{% if appointment.doctor.profession == "Оттолоринголог" %}
+				<img src="{% static 'user/ent.svg' %}"/>
+			{% endif %}
+			{% if appointment.doctor.profession == "Стоматолог" %}
+				<img src="{% static 'user/dentist.svg' %}"/>
+			{% endif %}
+			{% if appointment.doctor.profession == "Хирург" %}
+				<img src="{% static 'user/surgeon.svg' %}"/>
+			{% endif %}
+			{% if appointment.doctor.profession == "Кардиолог" %}
+				<img src="{% static 'user/cardiogram.svg' %}"/>
+			{% endif %}
+			<h2 class='specialist'>{{ appointment.doctor.profession }}</h2>
+		</div>
+	{% endfor %}
+	<section id='more-detailed-menu'>
+		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
+		<section id='info'>
+			<div id='time & date'>
+				<h1>Запись</h1>
+				<p id='time&date'>16:15    08.11</p>
+			</div>
+			<div id='addres'>
+				<h1>Адрес</h1>
+				<p>Буторина 10</p>
+			</div>
+			<div id='specialist'>
+				<h1>Специалист</h1>
+				<p id='specialist-name'>Хирург</p>
+			</div>
+			<div id='cabinet'>
+				<h1>Кабинет</h1>
+				<p>301</p>
+			</div>
+		</section>
+		<section id='status'>
+			<h1>Статус</h1>
+
+		</section>
+		<button id='late'>Опаздываю</button>
+		<button id='cancel'>Отменить запись</button>
+	</section>
+	<form id='add-session-form' method="post">
+		{% csrf_token %}
+		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
+		<div style='overflow-y: scroll;'>
+		<section id='specialist-form'>
+			<h1>Выберите специалиста</h1>
+			<div class="dropdown" style='width: 100%'>
+			  <input placeholder="Поиск" id="myInput" onkeyup="filterFunction()" name="specialist">
+			  <div id="myDropdown" class="dropdown-content">
+			    <a onclick="search_fill(this)">Офтальмолог</a>
+			    <a onclick="search_fill(this)">Хирург</a>
+			    <a onclick="search_fill(this)">Психиатр</a>
+			    <a onclick="search_fill(this)">Оттолоринголог</a>
+			    <a onclick="search_fill(this)">Стоматолог</a>
+			    <a onclick="search_fill(this)">Невролог</a>
+			    <a onclick="search_fill(this)">Педиатр</a>
+			    <a onclick="search_fill(this)">Кардиолог</a>
+			  </div>
+			</div>
+		</section>
+		<section id='date-form'>
+			<h1>Выберите дату</h1>
+			<input type='date' id='session-date' name="date"/>
+		</section>
+		<section id='time-form'>
+			<h1>Введите желаемое время</h1>
+			<input placeholder="8:00 - 18:00" name="time"/>
+		</section>
+		</div>
+		<button id='add-session-btn' class='shadow' type="submit" onclick="close_add_form()"><h1>Записаться</button>
+	</form>
+	<script src="{% static 'user/script.js' %}"></script>
+</body>
+</html>
