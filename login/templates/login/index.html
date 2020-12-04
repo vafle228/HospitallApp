@@ -1,0 +1,25 @@
+{% load static %}
+<DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="{% static 'login/style.css' %}" type="text/css"/>
+	<meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=0.4, user-scalable=no">
+	<title>Вход</title>
+</head>
+<body>
+	<section id='logo'>
+		<img src="{% static 'login/logo.svg' %}" style='width: 25%'>
+	</section>
+	<section id='log-in-form'>
+		<form method='POST'>
+			{% csrf_token %}
+			<input placeholder="Введите почту" name='email'/>
+			<input placeholder="Пароль" name='password' type='password'/>
+			<button class='shadow' type='submit'>Войти</button>
+		</form>
+	</section>
+	<section style='height: 30%; width: 100%; position: absolute; bottom: 0; display: flex; justify-content: center; margin: 0'>
+		<iframe width="285px" height="264px" frameBorder="0" src="{% static 'login/doctors.gif' %}"></iframe>
+	</section>
+</body>
+</html>
