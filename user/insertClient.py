@@ -85,8 +85,6 @@ def insertClient(client, wishedTime, waitTime, profession, Doctor, Appointment, 
     que = createQue(profession, Doctor, Appointment)
     client_referral = createReferral(client, HospitalUser, Appointment)
 
-    # print(que, client_referral)
-
     return clientAppointment(wishedTime, waitTime, que, client_referral)
 
 # 8:00 -> 10 => 8:00 до 8:10
