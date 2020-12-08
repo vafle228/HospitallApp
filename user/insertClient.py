@@ -1,3 +1,4 @@
+#asdfg
 def swapToSec(str_time):
     str_time = str_time.split(':')
     return (int(str_time[0]) * 3600) + (int(str_time[1]) * 60)
