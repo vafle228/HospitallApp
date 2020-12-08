@@ -1,0 +1,28 @@
+<DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=no">
+	<link rel="stylesheet" href="style.css" type="text/css"/>
+	<title>Вход</title>
+</head>
+<body>
+	<section id='logo'>
+		<img src='logo.svg' style='width: 25%'>
+	</section>
+	<section id='log-in-form'>
+		<form>
+			<input placeholder="ФИО" style='display: none' id='fio'/>
+			<input placeholder="Электронная почта"/>
+			<input placeholder="Пароль"/>
+			<input placeholder="Подтверждение пароля" style='display: none' id='confirm-pass'/>
+			<button class='shadow' id='log-btn'>Войти</button>
+			<button class='shadow' style='display: none' id='reg-btn'>Зарегистрироваться</button>
+			<a style="font-size: 30px" onclick="reg_form()" id='reg-text'>Перейти к регистрации</a>
+			<a style="font-size: 30px; display: none; text-align: center" onclick="log_form()" id='log-text'>
+				Перейти к авторизации
+			</a>
+		</form>
+	</section>
+	<script src='script.js'></script>
+</body>
+</html>
