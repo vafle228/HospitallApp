@@ -21,12 +21,13 @@ def userPage(request, username):
                 return render(request, 'user/index.html', {'appointments': appointments})
 
             variants = insertClient(user, time, 600, specialist, Doctor, Appointment, HospitalUser)
+            print(variants)
 
             appointment = Appointment.objects.create(
                 doctor=Doctor.objects.filter(profession=specialist)[0],
                 client_name=hospital_user,
-                appointment_start=variants['time'],
-                appointment_end=variants['endTime'],
+                appointment_start=variants[0]['time'],
+                appointment_end=variants[0]['endTime'],
                 appointment_date=date,
                 client_appeal='Заболел'
             )

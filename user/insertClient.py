@@ -58,7 +58,7 @@ def clientAppointment(wishedTime, waitTime, que, client_referral):
     backup_clients = [{'time': '0:00', 'endTime': '0:00'}]
 
     if isFreeTime(wishedTime, swapToTime(swapToSec(wishedTime) + waitTime), que, client_referral):
-        return {'time': wishedTime, 'endTime': swapToTime(swapToSec(wishedTime) + waitTime)}
+        return [{'time': wishedTime, 'endTime': swapToTime(swapToSec(wishedTime) + waitTime)}]
 
     for client in que + client_referral:
         for nearest_client in nearest_clients:
@@ -84,6 +84,8 @@ def clientAppointment(wishedTime, waitTime, que, client_referral):
 def insertClient(client, wishedTime, waitTime, profession, Doctor, Appointment, HospitalUser):
     que = createQue(profession, Doctor, Appointment)
     client_referral = createReferral(client, HospitalUser, Appointment)
+
+    # print(que, client_referral)
 
     return clientAppointment(wishedTime, waitTime, que, client_referral)
 
