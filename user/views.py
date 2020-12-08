@@ -3,11 +3,11 @@ from time import strptime
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from login.models import Appointment, HospitalUser, Doctor
+from .insertClient import insertClient
 
 
 def userPage(request, username):
     user = User.objects.filter(username=username)[0]
-
     if request.user == user:
         hospital_user = HospitalUser.objects.filter(name=user)[0]
         appointments = Appointment.objects.filter(client_name=hospital_user)
@@ -20,15 +20,18 @@ def userPage(request, username):
             if not(validTime(time)) or not(validDate(date)):
                 return render(request, 'user/index.html', {'appointments': appointments})
 
+            variants = insertClient(user, time, 600, specialist, Doctor, Appointment, HospitalUser)
+
             appointment = Appointment.objects.create(
-                doctor=Doctor.objects.all()[1],
+                doctor=Doctor.objects.filter(profession=specialist)[0],
                 client_name=hospital_user,
-                appointment_time=time,
+                appointment_start=variants['time'],
+                appointment_end=variants['endTime'],
                 appointment_date=date,
                 client_appeal='Заболел'
             )
             appointment.save()
-            appointments.append(appointment)
+            return redirect(f'/main/{username}')
 
         return render(request, 'user/index.html', {'appointments': appointments})
     return redirect('/login/')
@@ -52,9 +55,3 @@ def validTime(time):
         return False
     return True
 
-    # doctors = Doctor.objects.filter(profession='Кардиолог')
-    # que = []
-    # for doctor in doctors:
-    #     que.append(Appointment.objects.filter(doctor=doctor))
-    #
-    # print(que[0][0].appointment_time)
