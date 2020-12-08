@@ -22,7 +22,7 @@
 	{% for appointment in appointments %}
 		<div class='referral' style="background: url({% static 'user/referralbackground.svg' %}); background-size: cover;" onclick='more_info(this)'>
 			<h2 class='referral-header'>Запись</h2>
-			<h2 class='time'>{{ appointment.appointment_time|time:"H:i" }}</h2>
+			<h2 class='time'>{{ appointment.appointment_start|time:"H:i" }}</h2>
 			<h2 class='date'>{{ appointment.appointment_date|date:"j.m" }}</h2>
 			{% if appointment.doctor.profession == "Офтальмолог" %}
 				<img src="{% static 'user/ophtolmologist.svg' %}"/>

@@ -23,6 +23,16 @@ def isFreeTime(startTime, endTime):
     return True
 
 
+def createVariants(clients, waitTime, name):
+    variants = []
+    for client in clients:
+        variants.append({'Name': name,
+                         'time': client['endTime'],
+                         'endTime': swapToTime(swapToSec(client['endTime']) + waitTime)}
+                        )
+    return variants
+
+
 def insertClient(name, wishedTime, waitTime):
     nearest_clients = [{'Name': 'test', 'time': '0:00', 'endTime': '0:00'}]
     backup_clients = [{'Name': 'test', 'time': '0:00', 'endTime': '0:00'}]
@@ -33,37 +43,24 @@ def insertClient(name, wishedTime, waitTime):
     for client in que + client_referral:
         for nearest_client in nearest_clients:
             if abs(swapToSec(wishedTime) - swapToSec(nearest_client['endTime'])) > \
-               abs(swapToSec(wishedTime) - swapToSec(client['endTime'])) \
-               and abs(swapToSec(wishedTime) - swapToSec(client['endTime'])) <= 3600 \
-               and isFreeTime(client['endTime'], swapToTime(waitTime + swapToSec(client['endTime']))):
+                    abs(swapToSec(wishedTime) - swapToSec(client['endTime'])) \
+                    and abs(swapToSec(wishedTime) - swapToSec(client['endTime'])) <= 3600 \
+                    and isFreeTime(client['endTime'], swapToTime(waitTime + swapToSec(client['endTime']))):
                 nearest_clients.append(client)
 
         for backup_client in backup_clients:
             if abs(swapToSec(wishedTime) - swapToSec(backup_client['endTime'])) > abs(
-               swapToSec(wishedTime) - swapToSec(client['endTime'])) >= 3600 \
-               and isFreeTime(client['endTime'], swapToTime(waitTime + swapToSec(client['endTime']))):
+                    swapToSec(wishedTime) - swapToSec(client['endTime'])) >= 3600 \
+                    and isFreeTime(client['endTime'], swapToTime(waitTime + swapToSec(client['endTime']))):
                 backup_clients.append(client)
 
-    if len(nearest_clients):
-        variants = []
-        for nearest_client in nearest_clients[1:]:
-            variants.append({'Name': name,
-                             'time': nearest_client['endTime'],
-                             'endTime': swapToTime(swapToSec(nearest_client['endTime']) + waitTime)}
-                            )
-        return variants
-    else:
-        variants = []
-        for backup_client in backup_clients[1:]:
-            variants.append({'Name': name,
-                             'time': backup_client['endTime'],
-                             'endTime': swapToTime(swapToSec(backup_client['endTime']) + waitTime)}
-                            )
-        return variants
+    if len(nearest_clients[1:]):
+        return createVariants(nearest_clients[1:], waitTime, name)
+    return createVariants(backup_clients[1:], waitTime, name)
 
 
-que = [{'Name': 'Петя', 'time': '8:00', 'endTime': '8:12'},
-       {'Name': 'Вася', 'time': '9:00', 'endTime': '9:12'}]
+que = [{'name': 'Петя', 'time': '8:00', 'endTime': '8:12'},
+       {'name': 'Вася', 'time': '9:00', 'endTime': '9:12'}]
 
 client_referral = [{'time': '8:20', 'endTime': '8:35'}]
 

@@ -7,6 +7,7 @@ from login.models import Appointment, HospitalUser, Doctor
 
 def userPage(request, username):
     user = User.objects.filter(username=username)[0]
+
     if request.user == user:
         hospital_user = HospitalUser.objects.filter(name=user)[0]
         appointments = Appointment.objects.filter(client_name=hospital_user)
@@ -27,6 +28,7 @@ def userPage(request, username):
                 client_appeal='Заболел'
             )
             appointment.save()
+            appointments.append(appointment)
 
         return render(request, 'user/index.html', {'appointments': appointments})
     return redirect('/login/')
@@ -49,3 +51,10 @@ def validTime(time):
     except ValueError:
         return False
     return True
+
+    # doctors = Doctor.objects.filter(profession='Кардиолог')
+    # que = []
+    # for doctor in doctors:
+    #     que.append(Appointment.objects.filter(doctor=doctor))
+    #
+    # print(que[0][0].appointment_time)

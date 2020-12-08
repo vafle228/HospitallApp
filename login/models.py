@@ -32,6 +32,7 @@ class HospitalUser(models.Model):
 
 class Doctor(models.Model):
     doctor_name = models.ForeignKey(HospitalUser, on_delete=models.CASCADE)
+    room = models.CharField(max_length=20, default="301")
     profession = models.CharField(max_length=100, choices=professions, default="врач")
     rating = models.IntegerField()
 
@@ -42,7 +43,8 @@ class Doctor(models.Model):
 class Appointment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, default=None)
     client_name = models.ForeignKey(HospitalUser, on_delete=models.CASCADE)
-    appointment_time = models.TimeField(default=timezone.now)
+    appointment_start = models.TimeField(default=timezone.now)
+    appointment_end = models.TimeField(default=timezone.now)
     appointment_date = models.DateField(default=datetime.now)
     client_appeal = models.CharField(max_length=60, choices=appeal, default="Заболел")
 
