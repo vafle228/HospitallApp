@@ -1,4 +1,3 @@
-#asdfg
 def swapToSec(str_time):
     str_time = str_time.split(':')
     return (int(str_time[0]) * 3600) + (int(str_time[1]) * 60)
@@ -34,7 +33,7 @@ def createQue(profession, Doctor, Appointment):
                         })
     return que
 
-# я здесь
+
 def createReferral(client, HospitalUser, Appointment):
     hospital_user = HospitalUser.objects.filter(name=client)[0]
     appointments = Appointment.objects.filter(client_name=hospital_user)
