@@ -1,0 +1,131 @@
+<DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=0.4, user-scalable=no">
+	<link rel="stylesheet" href="style.css" type="text/css"/>
+	<title>Главная</title>
+</head>
+<body>
+	<header>
+		<section>
+			<div>
+				<img src='header logo.svg' style='height: 64px'/>
+				<h1>Направления</h1>
+			</div>
+			<button id='add-referral-btn' class='shadow' onclick="open_add_form()"><img src='plus.svg' style='height: 120px'/></button>
+		</section></header>
+	<main>
+		<div class='referral' onclick='more_info(this)'>
+			<h2 class='referral-header'>Запись</h2>
+			<h2 class='time'>12:00</h2>
+			<h2 class='date'>04.11</h2>
+			<img src='ophtolmologist.svg'/>
+			<h2 class='specialist'>Офтальмолог</h2>
+		</div>
+		<div class='referral'>
+			<h2 class='referral-header'>Запись</h2>
+			<h2 class='time'>12:00</h2>
+			<h2 class='date'>04.11</h2>
+			<img src='ophtolmologist.svg'/>
+			<h2 class='specialist'>Хирург</h2>
+		</div>
+		<div class='referral'>
+			<h2 class='referral-header'>Запись</h2>
+			<h2 class='time'>12:00</h2>
+			<h2 class='date'>04.11</h2>
+			<img src='ophtolmologist.svg'/>
+			<h2 class='specialist'>Педиатр</h2>
+		</div>
+		<div class='referral'>
+			<h2 class='referral-header'>Запись</h2>
+			<h2 class='time'>12:00</h2>
+			<h2 class='date'>04.11</h2>
+			<img src='ophtolmologist.svg'/>
+			<h2 class='specialist'>Офтальмолог</h2>
+		</div>
+		<div class='referral'>
+			<h2 class='referral-header'>Запись</h2>
+			<h2 class='time'>12:00</h2>
+			<h2 class='date'>04.11</h2>
+			<img src='ophtolmologist.svg'/>
+			<h2 class='specialist'>Психиатр</h2>
+		</div>
+		<div class='referral'>
+			<h2 class='referral-header'>Запись</h2>
+			<h2 class='time'>12:00</h2>
+			<h2 class='date'>04.11</h2>
+			<img src='ophtolmologist.svg'/>
+			<h2 class='specialist'>Офтальмолог</h2>
+		</div>
+		<div class='referral' onclick='more_info(this)'>
+			<h2 class='referral-header'>Запись</h2>
+			<h2 class='time'>9:00</h2>
+			<h2 class='date'>04.12</h2>
+			<img src='ophtolmologist.svg'/>
+			<h2 class='specialist'>Кардиолог</h2>
+		</div>
+	</main>
+	<nav class='shadow'>
+		<button><img src='home-btn.svg'/></button>
+		<button><img src='add-btn.svg'/></button>
+		<button><img src='bookmark.svg'/></button>
+		<button><img src='profile-btn.svg'/></button>
+	</nav>
+	<section id='more-detailed-menu'>
+		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
+		<section id='info'>
+			<div id='time & date'>
+				<h1>Запись</h1>
+				<p id='time&date'>16:15    08.11</p>
+			</div>
+			<div id='addres'>
+				<h1>Адрес</h1>
+				<p>Буторина 10</p>
+			</div>
+			<div id='specialist'>
+				<h1>Специалист</h1>
+				<p id='specialist-name'>Хирург</p>
+			</div>
+			<div id='cabinet'>
+				<h1>Кабинет</h1>
+				<p>301</p>
+			</div>
+		</section>
+		<section id='status'>
+			<h1>Статус</h1>
+
+		</section>
+		<button id='late'>Опаздываю</button>
+		<button id='cancel'>Отменить запись</button></section>
+	<section id='add-session-form'>
+		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
+		<div style='overflow-y: scroll;'>
+		<form id='specialist-form'>
+			<h1>Выберите специалиста</h1>
+			<div class="dropdown" style='width: 100%'>
+			  <input placeholder="Поиск" id="myInput" onkeyup="filterFunction()">
+			  <div id="myDropdown" class="dropdown-content">
+			    <a onclick="search_fill(this)">Офтальмолог</a>
+			    <a onclick="search_fill(this)">Хирург</a>
+			    <a onclick="search_fill(this)">Психиатр</a>
+			    <a onclick="search_fill(this)">Оттолоринголог</a>
+			    <a onclick="search_fill(this)">Стоматолог</a>
+			    <a onclick="search_fill(this)">Невролог</a>
+			    <a onclick="search_fill(this)">Педиатр</a>
+			    <a onclick="search_fill(this)">Кардиолог</a>
+			  </div>
+			</div>
+		</form>
+		<form id='date-form'>
+			<h1>Выберите дату</h1>
+			<input type='date' id='session-date' style='color: #fff'/>
+		</form>
+		<form id='time-form'>
+			<h1>Введите желаемое время</h1>
+			<input placeholder="8:00 - 18:00"/>
+		</form>
+		</div>
+		<button id='add-session-btn' class='shadow' onclick="add_session()"><h1>Записаться</button></section>
+	<script src='script.js'></script>
+</body>
+</html>

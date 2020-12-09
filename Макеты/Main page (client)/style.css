@@ -1,0 +1,266 @@
+* {
+	margin: 0;
+	font-family: 'Segoe UI';
+	font-size: 36px;
+	font-weight: 400;
+}
+.shadow {
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.08);
+}
+body {
+	width: 100%;
+	height: 100%;
+	background-color: #FAFAFA;
+}
+
+/*Заголовок*/
+header {
+	width: 100%;
+	padding: 50px 0;
+	position: fixed;
+	z-index: 1;
+	background-color: #FAFAFA;
+}
+header section{
+	display: flex;
+	justify-content: space-between;
+	border-radius: 40px;
+	height: 140px;
+	margin: 0 20px;
+	background: linear-gradient(to bottom right, #3EC0F3, #6699FF);
+	color: #000;
+	padding: 0 4px 0 60px;
+}
+header section div {
+	display: flex;
+	margin: auto 0;
+
+}
+header section div h1 {
+	height: 50%;
+	margin-left: 16px;
+	font-size: 52px;
+	font-weight: bold;
+	vertical-align: middle;
+}
+#add-referral-btn {
+	width: 20%;
+	margin: 6px 0;
+	border-radius: 40px;
+	border: none;
+	background-color: #fff;
+	outline: none;
+}
+
+/*Направления*/
+main {
+	position: absolute;
+	top: 240px;
+	width: 96%;
+	height: auto;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0 2%;
+}
+
+/*Направление*/
+.referral {
+	width: 440px;
+	height: 620px;
+	margin: 25px auto;
+	background: url('referral background.svg');
+	background-size: cover;
+	text-shadow: 0 0 20px 20px rgba(0, 0, 0, 1);
+	position: relative;
+}
+.referral img {
+	width: 200px;
+	height: 132px;
+	position: absolute;
+	bottom: 156px;
+	right: 120px;
+}
+h2 {
+	font-size: 42px;
+}
+.referral-header {
+	position: absolute;
+	top: 180px;
+	left: 40px;
+}
+.time {
+	position: absolute;
+	top: 180px;
+	right: 150px;
+	background: linear-gradient(to bottom, #3EC0F3, #6699FF);
+	border-radius: 20px;
+	padding: 5px;
+	font-size: 36px;
+	color: #fff;
+}
+.date {
+	position: absolute;
+	top: 180px;
+	right: 40px;
+}
+.specialist {
+	position: absolute;
+	bottom: 72px;
+	width: 100%;
+	text-align: center;
+}
+
+/*Меню подробнее*/
+#more-detailed-menu{
+	display: none;
+	position: fixed;
+	bottom: 0;
+	height: auto;
+	width: 90%;
+	background-color: #fff;
+	border-radius: 80px 80px 0 0;
+	box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.2);
+	padding: 100px 5% 50px 5%;
+}
+.decorate {
+	background-color: #DFDFDF;
+	width: 200px;
+	height: 20px;
+	border-radius: 20px;
+}
+#info {
+	margin-top: 25px;
+}
+#info div {
+	display: flex;
+	justify-content: space-between;
+}
+h1, p {
+	font-size: 64px;
+	font-weight: 300;
+}
+#status {
+	text-align: center;
+}
+#status h1 {
+	font-size: 100px;
+	margin: 50px 0;
+}
+#more-detailed-menu button {
+	width: 100%;
+	height: 110px;
+	border-radius: 30px;
+	border: none;
+	outline: none;
+	color: #fff;
+	font-size: 64px;
+	margin: 15px 0;
+}
+#late {
+	background: linear-gradient(to right, #3EC0F3, #6699FF);
+}
+#cancel {
+	background: linear-gradient(to right, #F43271, #F89571);
+}
+
+/*Запись на прием*/
+#add-session-form {
+	display: none;
+	position: fixed;
+	bottom: 0;
+	height: auto;
+	width: 90%;
+	background-color: #fff;
+	border-radius: 80px 80px 0 0;
+	box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.2);
+	padding: 100px 5% 50px 5%;
+}
+#add-session-form form {
+	width: 96%;
+	height: 240px;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
+	margin: 20px 0;
+	border-radius: 40px;
+	padding: 2%;
+}
+#add-session-btn {
+	width: 100%;
+	height: 120px;
+	border: none;
+	outline: none;
+	border-radius: 30px;
+	background-color: #fff;
+}
+#add-session-form form input {
+	height: 100px;
+	border-radius: 30px;
+	border: none;
+	width: 100%;
+	background: linear-gradient(to right, #3EC0F3, #6699FF);
+	margin-top: 30px;
+	outline: none;
+	padding: 0 5%;
+}
+
+#add-session-form form input::placeholder {color: #fff;}
+
+#myInput {
+  font-size: 36px;
+  color: #fff;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/*Навигационный бар*/
+nav {
+	width: 80%;
+	height: 160px;
+	margin: 1% 10%;
+	position: fixed;
+	bottom: 2%;
+	background-color: #fff;
+	border-radius: 40px;
+	display: flex;
+	justify-content: space-around;
+}
+nav button {
+	background-color: #fff;
+	border: none;
+	height: 160px;
+	width: 160px;
+	outline: none;
+	border-radius: 40px;
+}
+nav button:hover {
+	filter: brightness(0.9);
+}
+nav img {
+	height: 80px;
+	width: 80px;
+	margin: 40px;
+}
