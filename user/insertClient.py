@@ -17,6 +17,8 @@ def isFreeTime(startTime, endTime, que, client_referral):
         clientStart = swapToSec(client['time'])
         clientEnd = swapToSec(client['endTime'])
 
+        if startTime == clientStart and endTime == clientEnd:
+            return False
         if (clientStart < startTime < clientEnd) or (clientStart < endTime < clientEnd) or \
                 (startTime < clientStart < endTime) or (startTime < clientEnd < endTime):
             return False
