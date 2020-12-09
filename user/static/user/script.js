@@ -38,11 +38,11 @@ function search_fill(a) {
 	document.getElementById("myDropdown").style.display = 'none';
 }
 // Записаться
-// function add_session() {
-// 	var specialist = document.getElementById('myInput').value;
-// 	var date = document.getElementById('session-date').value;
-// 	close_add_form();
-//}
+function add_session() {
+	var specialist = document.getElementById('myInput').value;
+	var date = document.getElementById('session-date').value;
+	close_add_form();
+}
 
 // Меню подробнее
 function more_info(referral) {

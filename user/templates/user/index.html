@@ -2,46 +2,44 @@
 <DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="{% static 'user/style.css' %}" type="text/css"/>
 	<meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=0.4, user-scalable=no">
+	<link rel="stylesheet" href="{% static 'user/style.css' %}" type="text/css"/>
 	<title>Главная</title>
 </head>
 <body>
-	<header>
-		<section>
-			<div>
-				<img src="{% static 'user/headerlogo.svg' %}" style='height: 64px'/>
-				<h1>Направления</h1>
-			</div>
-			<button id='add-referral-btn' class='shadow' onclick="open_add_form()">
-				<img src="{% static 'user/plus.svg' %}" style='height: 120px'/>
-			</button>
-		</section>
-	</header>
 	<main>
 	{% for appointment in appointments %}
-		<div class='referral' style="background: url({% static 'user/referralbackground.svg' %}); background-size: cover;" onclick='more_info(this)'>
+		<div class='referral' style="background: url({% static 'user/icons/referralbackground.svg' %}); background-size: cover;" onclick='more_info(this)'>
 			<h2 class='referral-header'>Запись</h2>
 			<h2 class='time'>{{ appointment.appointment_start|time:"H:i" }}</h2>
 			<h2 class='date'>{{ appointment.appointment_date|date:"j.m" }}</h2>
 			{% if appointment.doctor.profession == "Офтальмолог" %}
-				<img src="{% static 'user/ophtolmologist.svg' %}"/>
+				<img src="{% static 'user/doctors/ophtolmologist.svg' %}"/>
 			{% endif %}
 			{% if appointment.doctor.profession == "Оттолоринголог" %}
-				<img src="{% static 'user/ent.svg' %}"/>
+				<img src="{% static 'user/doctors/ent.svg' %}"/>
 			{% endif %}
 			{% if appointment.doctor.profession == "Стоматолог" %}
-				<img src="{% static 'user/dentist.svg' %}"/>
+				<img src="{% static 'user/doctors/dentist.svg' %}"/>
 			{% endif %}
 			{% if appointment.doctor.profession == "Хирург" %}
-				<img src="{% static 'user/surgeon.svg' %}"/>
+				<img src="{% static 'user/doctors/surgeon.svg' %}"/>
 			{% endif %}
 			{% if appointment.doctor.profession == "Кардиолог" %}
-				<img src="{% static 'user/cardiogram.svg' %}"/>
+				<img src="{% static 'user/doctors/cardiogram.svg' %}"/>
 			{% endif %}
 			<h2 class='specialist'>{{ appointment.doctor.profession }}</h2>
 		</div>
 	{% endfor %}
+	</main>
+	<div id='nav-container'>
+		<nav class='shadow'>
+			<button><img src="{% static 'user/icons/home-btn.svg' %}"/></button>
+			<button><img src="{% static 'user/icons/add-btn.svg' %}"/></button>
+			<button><img src="{% static 'user/icons/bookmark.svg' %}"/></button>
+			<button><img src="{% static 'user/icons/profile-btn.svg' %}"/></button>
+		</nav>
+	</div>
 	<section id='more-detailed-menu'>
 		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
 		<section id='info'>
