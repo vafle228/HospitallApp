@@ -26,7 +26,7 @@ div {
 	background-size: cover;
 }
 p {
-	font-size: 15px;
+	font-size: 14px;
 	margin: auto 0;
 }
 #logo {
@@ -47,13 +47,51 @@ p {
 	width: 22vw;
 	height: 85vh;
 	margin-top: 5vh;
+	padding-right: 10px;
+	padding-top: 10px;
 	border-radius: 0;
 	box-shadow: none;
+	overflow-y: scroll;
 }
-.next-client {
+#timetable::-webkit-scrollbar {
+	background: linear-gradient(to bottom, #3EC0F3, #6699FF);
+	width: 8px;
+	border-radius: 4px;
+}
+#timetable::-webkit-scrollbar-thumb {
+	background-color: #fff;
+	border-radius: 4px;
+	border: #F1F1F1 solid 1px;
+}
+#next-client {
 	width: 100%;
 	height: 30%;
 	margin-bottom: 4%;
+	position: relative;
+}
+#next-client-info {
+	width: 100%;
+	height: 50%;
+	display: flex;
+	box-shadow: none;
+}
+#controll-menu {
+	width: 50%;
+	position: absolute;
+	bottom: 0;
+	box-shadow: none;
+	margin: 0 0 2% 5%;
+	height: 55%;
+}
+#controll-menu button {
+	font-size: 12px;
+	border-radius: 8px;
+	border: none;
+	width: 100%;
+	height: 28%;
+	margin: 2% 0;
+	color: #fff;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
 .timetable-client {
 	width: 100%;
@@ -61,8 +99,10 @@ p {
 	margin-top: 4%;
 	display: flex;
 }
-.timetable-client div {
+.timetable-client div, #next-client-info div {
 	margin: auto 5%;
+	width: 6vh;
+	height: 6vh;
 }
 #info {
 	width: 66vw;
