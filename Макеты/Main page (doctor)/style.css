@@ -10,7 +10,7 @@ body {
 	height: 100vh;
 	display: flex;
 	justify-content: space-between;
-	padding: 5vh;
+	padding: 3vw;
 }
 section {
 	margin: 0;
@@ -19,10 +19,21 @@ section {
 	border-radius: 20px;
 }
 div {
-	width: 2.5vw;
-	height: 2.5vw;
+	width: 4.5vh;
+	height: 4.5vh;
 	border-radius: 50%;
-	background-color: #707070;
+	background: url(account.png);
+	background-size: cover;
+}
+p {
+	font-size: 15px;
+	margin: auto 0;
+}
+#logo {
+	position: absolute;
+	width: 7vw;
+	margin-left: -1.5vw;
+	margin-top: -2vw;
 }
 #aside-timetable {
 	width: 4vw;
@@ -30,19 +41,14 @@ div {
 	margin-top: 10vh;
 }
 #aside-timetable div {
-	margin: 12.5px 0.75vw;
+	margin:  2vh auto;
 }
 #timetable {
-	width: 25vw;
+	width: 22vw;
 	height: 85vh;
 	margin-top: 5vh;
 	border-radius: 0;
 	box-shadow: none;
-}
-#info {
-	width: 59vw;
-	height: 85vh;
-	margin-top: 5vh;
 }
 .next-client {
 	width: 100%;
@@ -52,5 +58,14 @@ div {
 .timetable-client {
 	width: 100%;
 	height: 15%;
-	margin-bottom: 4%;
+	margin-top: 4%;
+	display: flex;
+}
+.timetable-client div {
+	margin: auto 5%;
+}
+#info {
+	width: 66vw;
+	height: 85vh;
+	margin-top: 5vh;
 }
