@@ -74,12 +74,12 @@
 	</section>
 	<form id='add-session-form' method="post">
 		{% csrf_token %}
-		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
+		<div style='display: flex; justify-content: center; margin-top: -75px; color: #fff;' onclick="close_add_form()"><div class='decorate'></div></div>
 		<div style='overflow-y: scroll;'>
 		<section id='specialist-form'>
 			<h1>Выберите специалиста</h1>
 			<div class="dropdown" style='width: 100%'>
-			  <input placeholder="Поиск" id="myInput" onkeyup="filterFunction()" name="specialist">
+			  <input placeholder="Поиск" id="myInput" onkeyup="filterFunction()" name="specialist" autocomplete="off">
 			  <div id="myDropdown" class="dropdown-content">
 			    <a onclick="search_fill(this)">Офтальмолог</a>
 			    <a onclick="search_fill(this)">Хирург</a>
@@ -94,11 +94,11 @@
 		</section>
 		<section id='date-form'>
 			<h1>Выберите дату</h1>
-			<input type='date' id='session-date' name="date"/>
+			<input type='date' id='session-date' name="date" autocomplete="off"/>
 		</section>
 		<section id='time-form'>
 			<h1>Введите желаемое время</h1>
-			<input placeholder="8:00 - 18:00" name="time"/>
+			<input placeholder="8:00" name="time" style="color: #fff;" autocomplete="off"/>
 		</section>
 		</div>
 		<button id='add-session-btn' class='shadow' type="submit" onclick="close_add_form()"><h1>Записаться</button>
