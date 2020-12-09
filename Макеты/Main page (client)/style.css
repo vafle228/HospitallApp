@@ -13,36 +13,6 @@ body {
 	background-color: #FAFAFA;
 }
 
-/*Заголовок*/
-header {
-	width: 100%;
-	padding: 50px 0;
-	position: fixed;
-	z-index: 1;
-	background-color: #FAFAFA;
-}
-header section{
-	display: flex;
-	justify-content: space-between;
-	border-radius: 40px;
-	height: 140px;
-	margin: 0 20px;
-	background: linear-gradient(to bottom right, #3EC0F3, #6699FF);
-	color: #000;
-	padding: 0 4px 0 60px;
-}
-header section div {
-	display: flex;
-	margin: auto 0;
-
-}
-header section div h1 {
-	height: 50%;
-	margin-left: 16px;
-	font-size: 52px;
-	font-weight: bold;
-	vertical-align: middle;
-}
 #add-referral-btn {
 	width: 20%;
 	margin: 6px 0;
@@ -55,7 +25,7 @@ header section div h1 {
 /*Направления*/
 main {
 	position: absolute;
-	top: 240px;
+	top: 40px;
 	width: 96%;
 	height: auto;
 	display: flex;

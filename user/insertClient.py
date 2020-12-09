@@ -71,8 +71,8 @@ def clientAppointment(wishedTime, waitTime, que, client_referral):
 
         for backup_client in backup_clients:
             time = swapToTime(waitTime + swapToSec(client['endTime']))
-            if abs(swapToSec(wishedTime) - swapToSec(backup_client['endTime'])) > abs(
-                    swapToSec(wishedTime) - swapToSec(client['endTime'])) >= 3600 \
+            if abs(swapToSec(wishedTime) - swapToSec(backup_client['endTime'])) > \
+                    abs(swapToSec(wishedTime) - swapToSec(client['endTime'])) >= 3600 \
                     and isFreeTime(client['endTime'], time, que, client_referral):
                 backup_clients.append(client)
 
@@ -90,4 +90,4 @@ def insertClient(client, wishedTime, waitTime, profession, Doctor, Appointment, 
 # 8:00 -> 10 => 8:00 до 8:10
 # 8:00 -> 5 => 8:10 до 8:15
 # 8:50 -> 30 => 8:50 до 9:20
-# 9:00 -> 10 => 9:00 до 9:10 (9 до 10 и 8 до 9)
+# 9:00 -> 10 => 10:00 до 10:10 (9 до 10 и 8 до 9)
