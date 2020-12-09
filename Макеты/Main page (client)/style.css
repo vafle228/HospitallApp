@@ -8,8 +8,6 @@
 	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.08);
 }
 body {
-	width: 100%;
-	height: 100%;
 	background-color: #FAFAFA;
 }
 #add-referral-btn {
@@ -29,8 +27,7 @@ main {
 	height: auto;
 	display: flex;
 	flex-wrap: wrap;
-	padding: 0 2%;
-	bottom: 3%;
+	padding: 0 2% 240px;
 }
 
 /*Направление*/
@@ -227,7 +224,7 @@ nav button {
 	background-color: #fff;
 	border: none;
 	height: 160px;
-	width: 160px;
+	width: 180px;
 	outline: none;
 	border-radius: 40px;
 }
