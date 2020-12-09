@@ -1,11 +1,12 @@
-// Открыть форму записи
+// Закрыть форму записи
 function close_add_form() {
 	var form = document.getElementById('add-session-form');
 	form.style.display = 'none';
 	var menu = document.getElementById('more-detailed-menu');
 	menu.style.display = 'none';
 }
-// Закрыть форму записи
+
+// Открыть форму записи
 function open_add_form() {
 	var form = document.getElementById('add-session-form');
 	form.style.display = 'block';
@@ -37,19 +38,16 @@ function search_fill(a) {
 	input.value = a.textContent;
 	document.getElementById("myDropdown").style.display = 'none';
 }
-// Записаться
-function add_session() {
-	var specialist = document.getElementById('myInput').value;
-	var date = document.getElementById('session-date').value;
-	close_add_form();
-}
 
 // Меню подробнее
 function more_info(referral) {
-	var menu = document.getElementById('more-detailed-menu');
-	menu.style.display = 'block';
-	var specialist = document.getElementById('specialist-name');
-	specialist.innerText = referral.childNodes[9].innerHTML;
-	var time = document.getElementById('time&date');
-	time.innerText = referral.childNodes[3].innerHTML + '    ' + referral.childNodes[5].innerHTML;
+	var form = document.getElementById('add-session-form');
+	if (form.style.display != 'block'){
+		var menu = document.getElementById('more-detailed-menu');
+		menu.style.display = 'block';
+		var specialist = document.getElementById('specialist-name');
+		specialist.innerText = referral.childNodes[9].innerHTML;
+		var time = document.getElementById('time&date');
+		time.innerText = referral.childNodes[3].innerHTML + '    ' + referral.childNodes[5].innerHTML;
+	}
 }

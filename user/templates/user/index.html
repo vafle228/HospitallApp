@@ -5,6 +5,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=0.4, user-scalable=no">
 	<link rel="stylesheet" href="{% static 'user/style.css' %}" type="text/css"/>
 	<title>Главная</title>
+	<style>
+		::-webkit-calendar-picker-indicator {
+		  background: url("{% static 'user/icons/calendar.svg' %}");
+		}
+	</style>
 </head>
 <body>
 	<main>
@@ -35,7 +40,7 @@
 	<div id='nav-container'>
 		<nav class='shadow'>
 			<button><img src="{% static 'user/icons/home-btn.svg' %}"/></button>
-			<button><img src="{% static 'user/icons/add-btn.svg' %}"/></button>
+			<button onclick="open_add_form();"><img src="{% static 'user/icons/add-btn.svg' %}"/></button>
 			<button><img src="{% static 'user/icons/bookmark.svg' %}"/></button>
 			<button><img src="{% static 'user/icons/profile-btn.svg' %}"/></button>
 		</nav>
