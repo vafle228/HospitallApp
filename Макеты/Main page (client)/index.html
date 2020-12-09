@@ -6,6 +6,14 @@
 	<title>Главная</title>
 </head>
 <body>
+<!-- 	<header>
+		<section>
+			<div>
+				<img src='header logo.svg' style='height: 64px'/>
+				<h1>Направления</h1>
+			</div>
+			<button id='add-referral-btn' class='shadow' onclick="open_add_form()"><img src='plus.svg' style='height: 120px'/></button>
+		</section></header> -->
 	<main>
 		<div class='referral' onclick='more_info(this)'>
 			<h2 class='referral-header'>Запись</h2>
@@ -57,14 +65,14 @@
 			<h2 class='specialist'>Кардиолог</h2>
 		</div>
 	</main>
-	<section>
+	<div id='nav-container'>
 		<nav class='shadow'>
 			<button><img src='home-btn.svg'/></button>
 			<button><img src='add-btn.svg'/></button>
 			<button><img src='bookmark.svg'/></button>
 			<button><img src='profile-btn.svg'/></button>
 		</nav>
-	</section>
+	</div>
 	<section id='more-detailed-menu'>
 		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
 		<section id='info'>
