@@ -7,21 +7,28 @@
 </head>
 <body>
 	<section id='logo'>
-		<img src='logo.svg' style='width: 25%'>
+		<img src='logo.svg' style='width: 50%'>
 	</section>
-	<section id='log-in-form'>
-		<form>
-			<input placeholder="ФИО" style='display: none' id='fio'/>
-			<input placeholder="Электронная почта"/>
-			<input placeholder="Пароль"/>
-			<input placeholder="Подтверждение пароля" style='display: none' id='confirm-pass'/>
-			<button class='shadow' id='log-btn'>Войти</button>
-			<button class='shadow' style='display: none' id='reg-btn'>Зарегистрироваться</button>
-			<a style="font-size: 30px" onclick="reg_form()" id='reg-text'>Перейти к регистрации</a>
-			<a style="font-size: 30px; display: none; text-align: center" onclick="log_form()" id='log-text'>
-				Перейти к авторизации
-			</a>
+	<h1>Добро пожаловать<br/>Войдите или зарегистрируйтесь</h1>
+	<section>
+		<!-- Форма авторизации -->
+		<form id='log-form'>
+			<input placeholder="Электронная почта" name='email'/>
+			<input placeholder="Пароль" name='password'/>
+			<button id='log-btn' type='submit'>Войти</button>
 		</form>
+		<!-- Форма регистрации -->
+		<form id='reg-form'>
+			<input placeholder="ФИО" name='name'/>
+			<input placeholder="Электронная почта" name='email'/>
+			<input placeholder="Пароль" name='password'/>
+			<input placeholder="Подтверждение пароля" name='confirm-pass'/>
+			<button id='reg-btn' type='submit'>Зарегистрироваться</button>
+		</form>
+	</section>
+	<section style='position: absolute; bottom: 8px' id='choice'>
+		<button onclick="log_form()" id='swap-to-log'>Войти</button>
+		<button onclick="reg_form()" id='swap-to-reg'>Зарегистрироваться</button>
 	</section>
 	<script src='script.js'></script>
 </body>
