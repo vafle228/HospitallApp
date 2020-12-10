@@ -99,31 +99,35 @@
 		<button id='cancel'>Отменить запись</button></section>
 	<section id='add-session-form'>
 		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
-		<div style='overflow-y: scroll;'>
-		<form id='specialist-form'>
-			<h1>Выберите специалиста</h1>
-			<div class="dropdown" style='width: 100%'>
-			  <input placeholder="Поиск" id="myInput" onkeyup="filterFunction()">
-			  <div id="myDropdown" class="dropdown-content">
-			    <a onclick="search_fill(this)">Офтальмолог</a>
-			    <a onclick="search_fill(this)">Хирург</a>
-			    <a onclick="search_fill(this)">Психиатр</a>
-			    <a onclick="search_fill(this)">Оттолоринголог</a>
-			    <a onclick="search_fill(this)">Стоматолог</a>
-			    <a onclick="search_fill(this)">Невролог</a>
-			    <a onclick="search_fill(this)">Педиатр</a>
-			    <a onclick="search_fill(this)">Кардиолог</a>
-			  </div>
+		<div id='add-session-form1'>
+			<div style='overflow-y: scroll;'>
+				<form id='specialist-form'>
+					<h1>Выберите специалиста</h1>
+					<div class="dropdown" style='width: 100%'>
+					  <input placeholder="Поиск" id="myInput" onkeyup="filterFunction()">
+					  <div id="myDropdown" class="dropdown-content">
+					    <a onclick="search_fill(this)">Офтальмолог</a>
+					    <a onclick="search_fill(this)">Хирург</a>
+					    <a onclick="search_fill(this)">Психиатр</a>
+					    <a onclick="search_fill(this)">Оттолоринголог</a>
+					    <a onclick="search_fill(this)">Стоматолог</a>
+					    <a onclick="search_fill(this)">Невролог</a>
+					    <a onclick="search_fill(this)">Педиатр</a>
+					    <a onclick="search_fill(this)">Кардиолог</a>
+					  </div>
+					</div>
+				</form>
+				<form id='date-form'>
+					<h1>Выберите дату</h1>
+					<input type='date' id='session-date' style='color: #fff'/>
+				</form>
+				<form id='time-form'>
+					<h1>Введите желаемое время</h1>
+					<input placeholder="8:00"/>
+				</form>
 			</div>
-		</form>
-		<form id='date-form'>
-			<h1>Выберите дату</h1>
-			<input type='date' id='session-date' style='color: #fff'/>
-		</form>
-		<form id='time-form'>
-			<h1>Введите желаемое время</h1>
-			<input placeholder="8:00"/>
-		</form>
+		</div>
+		<div id='time-variants-form' style='display: none'>
 		<h1 style='text-align: center;'>Ваше время занято</h1>
 		<h1 style='text-align: center;'>Выберите время приема</h1>
 		<div id='time-container'>
@@ -140,6 +144,9 @@
 			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
 			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
 		</div>
-		<button id='add-session-btn' class='shadow' onclick="add_session()"><h1>Записаться</button></section>
+		</div>
+		<button id='add-session-btn' class='shadow' onclick="form_show()"><h1>Записаться</button>
+		<button id='confirm-session-btn' class='shadow' onclick="close_add_form()"><h1>Записаться</button>
+		</section>
 	<script src='script.js'></script>
 </body>
