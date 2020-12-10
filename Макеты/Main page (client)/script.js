@@ -55,5 +55,13 @@ function more_info(referral) {
 }
 
 function selection_time(button) {
-	button.ClassName += ' selected';
+	if (button.className == 'time-variant selected') {
+		button.className = 'time-variant';
+	} else {
+		let buttons = document.getElementsByClassName('selected');
+		for (let i = 0; buttons.length; i++) {
+			buttons[i].className = 'time-variant';
+		}
+		button.className += ' selected';
+	}
 }
