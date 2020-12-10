@@ -145,6 +145,7 @@ h1, p {
 	padding: 100px 5% 50px 5%;
 }
 #add-session-form form {
+	display: none;
 	width: 96%;
 	height: 240px;
 	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
@@ -204,6 +205,31 @@ h1, p {
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
+
+/*Предложение вариантов времени*/
+#time-container {
+	overflow-y: scroll;
+	width: 100%;
+	height: 440px;
+	display: flex;
+	flex-wrap: wrap;
+	margin: 40px 0;
+}
+.time-variant {
+	width: 45%;
+	height: 90px;
+	margin: 1% 2.5%;
+	border-radius: 20px;
+	border: none;
+	outline: none;
+	background: linear-gradient(to right, #3EC0F3, #6699FF);
+	color: #fff;
+	font-size: 48px;
+}
+.selected {
+	background: linear-gradient(to right, #F43271, #F89571);
+}
+
 
 /*Навигационный бар*/
 #nav-container {

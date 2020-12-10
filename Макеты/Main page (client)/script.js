@@ -53,3 +53,7 @@ function more_info(referral) {
 	var time = document.getElementById('time&date');
 	time.innerText = referral.childNodes[3].innerHTML + '    ' + referral.childNodes[5].innerHTML;
 }
+
+function selection_time(button) {
+	button.ClassName += ' selected';
+}
