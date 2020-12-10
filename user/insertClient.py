@@ -25,68 +25,35 @@ def isFreeTime(startTime, endTime, que, client_referral):
     return True
 
 
-def createQue(profession, Doctor, Appointment):
-    doctors, que = Doctor.objects.filter(profession=profession), []
-    for doctor in doctors:
-        appointments = Appointment.objects.filter(doctor=doctor)
-        for appointment in appointments:
-            que.append({'time': ':'.join(str(appointment.appointment_start).split(':')[:2]),
-                        'endTime': ':'.join(str(appointment.appointment_end).split(':')[:2])
-                        })
-    return que
-
-
-def createReferral(client, HospitalUser, Appointment):
-    hospital_user = HospitalUser.objects.filter(name=client)[0]
-    appointments = Appointment.objects.filter(client_name=hospital_user)
-    referral = []
-
-    for appointment in appointments:
-        referral.append({'time': ':'.join(str(appointment.appointment_start).split(':')[:2]),
-                         'endTime': ':'.join(str(appointment.appointment_end).split(':')[:2])
-                         })
-    return referral
-
-
 def createVariants(clients, waitTime):
     variants = []
     for client in clients:
-        variants.append({'time': client['endTime'], 'endTime': swapToTime(swapToSec(client['endTime']) + waitTime)})
+        variant = ({'time': client['endTime'],
+                    'endTime': swapToTime(swapToSec(client['endTime']) + waitTime),
+                    'doctor': client['doctor'].pk})
+        if variant not in variants:
+            variants.append(variant)
     return variants
 
 
 def clientAppointment(wishedTime, waitTime, que, client_referral):
-    nearest_clients = [{'time': '0:00', 'endTime': '0:00'}]
-    backup_clients = [{'time': '0:00', 'endTime': '0:00'}]
+    backup_clients = [{'time': '0:00', 'endTime': '0:00', 'doctor': None}]
 
     if isFreeTime(wishedTime, swapToTime(swapToSec(wishedTime) + waitTime), que, client_referral):
-        return [{'time': wishedTime, 'endTime': swapToTime(swapToSec(wishedTime) + waitTime)}]
+        return {'time': wishedTime, 'endTime': swapToTime(swapToSec(wishedTime) + waitTime), 'doctor': que[0]['doctor']}
 
     for client in que + client_referral:
-        for nearest_client in nearest_clients:
-            time = swapToTime(waitTime + swapToSec(client['endTime']))
-            if abs(swapToSec(wishedTime) - swapToSec(nearest_client['endTime'])) > \
-                    abs(swapToSec(wishedTime) - swapToSec(client['endTime'])) \
-                    and abs(swapToSec(wishedTime) - swapToSec(client['endTime'])) <= 3600 \
-                    and isFreeTime(client['endTime'], time, que, client_referral):
-                nearest_clients.append(client)
-
         for backup_client in backup_clients:
             time = swapToTime(waitTime + swapToSec(client['endTime']))
             if abs(swapToSec(wishedTime) - swapToSec(backup_client['endTime'])) > \
-                    abs(swapToSec(wishedTime) - swapToSec(client['endTime'])) >= 3600 \
+                    abs(swapToSec(wishedTime) - swapToSec(client['endTime'])) \
                     and isFreeTime(client['endTime'], time, que, client_referral):
                 backup_clients.append(client)
 
-    if len(nearest_clients[1:]):
-        return createVariants(nearest_clients[1:], waitTime)
     return createVariants(backup_clients[1:], waitTime)
 
 
-def insertClient(client, wishedTime, waitTime, profession, Doctor, Appointment, HospitalUser):
-    que = createQue(profession, Doctor, Appointment)
-    client_referral = createReferral(client, HospitalUser, Appointment)
-
+def insertClient(wishedTime, waitTime, que, client_referral):
     return clientAppointment(wishedTime, waitTime, que, client_referral)
 
 # 8:00 -> 10 => 8:00 до 8:10

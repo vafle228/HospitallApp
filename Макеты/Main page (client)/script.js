@@ -23,12 +23,22 @@ function filterFunction() {
 	a = div.getElementsByTagName("a");
 	for (i = 0; i < a.length; i++) {
 		txtValue = a[i].textContent || a[i].innerText;
+<<<<<<< Updated upstream
 	if (txtValue.toUpperCase().indexOf(filter) > -1) {
 		a[i].style.display = "";
 	} else {
 		a[i].style.display = "none";
     }
   }
+=======
+		if (txtValue.toUpperCase().indexOf(filter) > -1) {
+			a[i].style.display = "";
+		} 
+		else {
+			a[i].style.display = "none";
+		}
+	}
+>>>>>>> Stashed changes
 }
 
 // Выбор специалиста
@@ -39,12 +49,17 @@ function search_fill(a) {
 }
 // Записаться
 function form_show() {
+<<<<<<< Updated upstream
 	document.getElementById('add-session-form1').style.display = 'none';
 	document.getElementById('add-session-btn').style.display = 'none';
 
 	document.getElementById('confirm-session-btn').style.display = 'block';
 	document.getElementById('time-variants-form').style.display = 'block';
 
+=======
+	document.getElementById('add-session-form').style.display = 'none';
+	document.getElementById('time-container').style.display = 'block';
+>>>>>>> Stashed changes
 }
 
 // Меню подробнее

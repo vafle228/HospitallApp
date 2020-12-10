@@ -11,7 +11,7 @@
 		<img src="{% static 'login/logo.svg' %}" style='width: 25%'>
 	</section>
 	<section id='log-in-form'>
-		<form method='POST'>
+		<form method='POST' action="{% url 'login-user' %}">
 			{% csrf_token %}
 			<input placeholder="Введите почту" name='email'/>
 			<input placeholder="Пароль" name='password' type='password'/>

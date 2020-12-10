@@ -1,58 +1,75 @@
-from datetime import datetime
-from time import strptime
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
+from django.http import JsonResponse
 from django.contrib.auth.models import User
 from login.models import Appointment, HospitalUser, Doctor
 from .insertClient import insertClient
+from .forms import AppointmentForm
 
 
-def userPage(request, username):
-    user = User.objects.filter(username=username)[0]
-    if request.user == user:
-        hospital_user = HospitalUser.objects.filter(name=user)[0]
-        appointments = Appointment.objects.filter(client_name=hospital_user)
+def userPage(request, identifier):
+    if User.objects.filter(pk=identifier).exists():
+        user = User.objects.filter(pk=identifier)[0]
+        if request.user == user and request.user.is_authenticated:
+            hospital_user = HospitalUser.objects.filter(name=user)[0]
+            appointments = Appointment.objects.filter(client_name=hospital_user)
 
-        if request.method == 'POST':
-            specialist = request.POST['specialist']
-            date = request.POST['date']
-            time = request.POST['time']
-
-            if not(validTime(time)) or not(validDate(date)):
-                return render(request, 'user/index.html', {'appointments': appointments})
-
-            variants = insertClient(user, time, 600, specialist, Doctor, Appointment, HospitalUser)
-            print(variants)
-
-            appointment = Appointment.objects.create(
-                doctor=Doctor.objects.filter(profession=specialist)[0],
-                client_name=hospital_user,
-                appointment_start=variants[0]['time'],
-                appointment_end=variants[0]['endTime'],
-                appointment_date=date,
-                client_appeal='Заболел'
-            )
-            appointment.save()
-            return redirect(f'/main/{username}')
-
-        return render(request, 'user/index.html', {'appointments': appointments})
+            return render(request, 'user/index.html', {'appointments': appointments, 'id': identifier})
     return redirect('/login/')
 
 
-def validDate(date):
-    date = list(map(int, date.split('-')))
-    day, month, year = date[2], date[1], date[0]
-    datetime(year, month, day)
-    try:
-        datetime(year, month, day)
-    except ValueError:
-        return False
-    return True
+def appointmentCheck(request, identifier):
+    if User.objects.filter(pk=identifier).exists():
+        user = User.objects.filter(pk=identifier)[0]
+
+        if request.method == "POST" and request.user == user and request.user.is_authenticated:
+            form = AppointmentForm(request.POST)
+            if form.is_valid():
+                variants, client_referral = [], createReferral(request.user)
+                time = ':'.join(str(form.cleaned_data['time']).split(':')[:2])
+
+                for doctor in Doctor.objects.filter(profession=form.cleaned_data['specialist']):
+                    variant = insertClient(time, 600, createQue(doctor), client_referral)
+                    if isinstance(variant, dict):
+                        return HttpResponse(None)
+                    variants += variant
+                print(type(variants[0]))
+                return JsonResponse(variants, safe=False)
+    return HttpResponse("Error")
 
 
-def validTime(time):
-    try:
-        strptime(time, '%H:%M')
-    except ValueError:
-        return False
-    return True
+def appointmentCreate(request):
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
 
+        if form.is_valid():
+            variants, client_referral, time = [], createReferral(request.user), form.cleaned_data['time']
+            for doctor in Doctor.objects.filter(profession=form.cleaned_data['specialist']):
+                variant = insertClient(time, 600, createQue(doctor), client_referral)
+                if isinstance(variant, dict):
+                    form.save(variant, HospitalUser.objects.filter(name=request.user))
+                    return redirect(f'/main/{request.user.username}')
+                variants.append(variant)
+        return redirect(f'/main/{request.user.username}')
+
+
+def createQue(doctor):
+    appointments, que = Appointment.objects.filter(doctor=doctor), []
+    for appointment in appointments:
+        que.append({'time': ':'.join(str(appointment.appointment_start).split(':')[:2]),
+                    'endTime': ':'.join(str(appointment.appointment_end).split(':')[:2]),
+                    'doctor': doctor
+                    })
+    return que
+
+
+def createReferral(user):
+    hospital_user = HospitalUser.objects.filter(name=user)[0]
+    appointments = Appointment.objects.filter(client_name=hospital_user)
+    referral = []
+
+    for appointment in appointments:
+        referral.append({'time': ':'.join(str(appointment.appointment_start).split(':')[:2]),
+                         'endTime': ':'.join(str(appointment.appointment_end).split(':')[:2]),
+                         'doctor': appointment.doctor
+                         })
+    return referral

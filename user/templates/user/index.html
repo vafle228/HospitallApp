@@ -44,7 +44,6 @@
 			<button><img src="{% static 'user/icons/bookmark.svg' %}"/></button>
 			<button><img src="{% static 'user/icons/profile-btn.svg' %}"/></button>
 		</nav>
-	</div>
 	<section id='more-detailed-menu'>
 		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
 		<section id='info'>
@@ -70,16 +69,14 @@
 
 		</section>
 		<button id='late'>Опаздываю</button>
-		<button id='cancel'>Отменить запись</button>
-	</section>
-	<form id='add-session-form' method="post">
-		{% csrf_token %}
-		<div style='display: flex; justify-content: center; margin-top: -75px; color: #fff;' onclick="close_add_form()"><div class='decorate'></div></div>
+		<button id='cancel'>Отменить запись</button></section>
+	<section id='add-session-form'>
+		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
 		<div style='overflow-y: scroll;'>
-		<section id='specialist-form'>
+		<form id='specialist-form'>
 			<h1>Выберите специалиста</h1>
 			<div class="dropdown" style='width: 100%'>
-			  <input placeholder="Поиск" id="myInput" onkeyup="filterFunction()" name="specialist" autocomplete="off">
+			  <input placeholder="Поиск" id="myInput" onkeyup="filterFunction()">
 			  <div id="myDropdown" class="dropdown-content">
 			    <a onclick="search_fill(this)">Офтальмолог</a>
 			    <a onclick="search_fill(this)">Хирург</a>
@@ -91,18 +88,50 @@
 			    <a onclick="search_fill(this)">Кардиолог</a>
 			  </div>
 			</div>
-		</section>
-		<section id='date-form'>
+		</form>
+		<form id='date-form'>
 			<h1>Выберите дату</h1>
-			<input type='date' id='session-date' name="date" autocomplete="off"/>
-		</section>
-		<section id='time-form'>
+			<input type='date' id='session-date' style='color: #fff'/>
+		</form>
+		<form id='time-form'>
 			<h1>Введите желаемое время</h1>
-			<input placeholder="8:00" name="time" style="color: #fff;" autocomplete="off"/>
-		</section>
+			<input placeholder="8:00"/>
+		</form>
+		<h1 style='text-align: center;'>Ваше время занято</h1>
+		<h1 style='text-align: center;'>Выберите время приема</h1>
+		<div id='time-container'>
 		</div>
-		<button id='add-session-btn' class='shadow' type="submit" onclick="close_add_form()"><h1>Записаться</button>
-	</form>
+		<button id='add-session-btn' class='shadow' onclick=""><h1>Записаться</button>
+	</section>
+	<script type="text/javascript" src="{% static 'user/jquery-3.5.1.min.js' %}"></script>
 	<script src="{% static 'user/script.js' %}"></script>
+	<script>
+		$("#add-session-btn").click(function() {
+			$.ajax({
+				type: "POST",
+				url: "/main/appointment_check/" + "{{ id }}",
+				data: {
+					specialist: $("#myInput").val(),
+					date: $("#session-date").val(),
+					time: $("#time-input").val(),
+					appeal: 'Заболел',
+					csrfmiddlewaretoken: "{{ csrf_token }}"
+				},
+				cache: false,
+				success: function(response){
+					for(let i =0; i < response.length; i++){
+						let button = document.createElement('button');
+						button.className = 'time-variant';
+						button.name = response[i]['doctor'];
+						button.innerHTML = `${response[i]["time"]} (${response[i]["date"]})`;
+						button.onclick = function(){
+							selection_time(button);
+						}
+					}
+				}
+			})
+			return false;
+		})
+	</script>
 </body>
 </html>
