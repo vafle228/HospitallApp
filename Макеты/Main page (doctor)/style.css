@@ -12,6 +12,9 @@ body {
 	justify-content: space-between;
 	padding: 3vw;
 }
+button:hover {
+	filter: brightness(0.8);
+}
 section {
 	margin: 0;
 	background-color: #fff;
@@ -24,6 +27,10 @@ div {
 	border-radius: 50%;
 	background: url(account.png);
 	background-size: cover;
+	transition: transform .5s;
+}
+div:hover {
+	transform: scale(1.05);
 }
 p {
 	font-size: 14px;
@@ -34,6 +41,52 @@ p {
 	width: 7vw;
 	margin-left: -1.5vw;
 	margin-top: -2vw;
+}
+header {
+	position: fixed;
+	right: 3vw;
+	width: 30%;
+	height: 10%;
+	top: 0;
+}
+header section {
+	width: 100%;
+	height: 40%;
+	display: flex;
+	justify-content: space-between;
+	position: absolute;
+	top: 30%;
+	box-shadow: none;
+}
+header button {
+	font-size: 12px;
+	border-radius: 8px;
+	border: none;
+	width: 40%;
+	height: 100%;
+	color: #fff;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
+	outline: none;
+	font-weight: 400;
+}
+#profile-name {
+	filter: none;
+	text-align: left;
+	padding-left: 10%;
+	padding-right: 10%;
+	width: 50%;
+	color: #000;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
+	border-radius: 20px;
+	background-color: #fff;
+}
+#profile-img {
+	height: 7vh;
+	width: 7vh;
+	position: absolute;
+	right: 0;
+	top: -1vh;
+	border: #fff solid 3px;
 }
 #aside-timetable {
 	width: 4vw;
@@ -97,6 +150,10 @@ p {
 	height: 15%;
 	margin-top: 4%;
 	display: flex;
+	transition: transform .5s;
+}
+.timetable-client:hover {
+	transform: scale(0.96);
 }
 .timetable-client div, #next-client-info div {
 	margin: auto 5%;
