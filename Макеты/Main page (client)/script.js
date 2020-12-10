@@ -1,11 +1,11 @@
-// Открыть форму записи
+// Закрыть форму записи
 function close_add_form() {
 	var form = document.getElementById('add-session-form');
 	form.style.display = 'none';
 	var menu = document.getElementById('more-detailed-menu');
 	menu.style.display = 'none';
 }
-// Закрыть форму записи
+// Открыть форму записи
 function open_add_form() {
 	var form = document.getElementById('add-session-form');
 	form.style.display = 'block';
@@ -16,17 +16,17 @@ function open_add_form() {
 // Поиск специалиста
 function filterFunction() {
 	document.getElementById("myDropdown").style.display = 'block';
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  div = document.getElementById("myDropdown");
-  a = div.getElementsByTagName("a");
-  for (i = 0; i < a.length; i++) {
-    txtValue = a[i].textContent || a[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      a[i].style.display = "";
-    } else {
-      a[i].style.display = "none";
+	var input, filter, ul, li, a, i;
+	input = document.getElementById("myInput");
+	filter = input.value.toUpperCase();
+	div = document.getElementById("myDropdown");
+	a = div.getElementsByTagName("a");
+	for (i = 0; i < a.length; i++) {
+		txtValue = a[i].textContent || a[i].innerText;
+	if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		a[i].style.display = "";
+	} else {
+		a[i].style.display = "none";
     }
   }
 }
@@ -54,6 +54,7 @@ function more_info(referral) {
 	time.innerText = referral.childNodes[3].innerHTML + '    ' + referral.childNodes[5].innerHTML;
 }
 
+// Выбор времени приема
 function selection_time(button) {
 	if (button.className == 'time-variant selected') {
 		button.className = 'time-variant';
