@@ -54,14 +54,13 @@ p {
 	overflow-y: scroll;
 }
 #timetable::-webkit-scrollbar {
-	background: linear-gradient(to bottom, #3EC0F3, #6699FF);
+	background-color: #fff;
 	width: 8px;
 	border-radius: 4px;
 }
 #timetable::-webkit-scrollbar-thumb {
-	background-color: #fff;
+	background: linear-gradient(to bottom, #3EC0F3, #6699FF);
 	border-radius: 4px;
-	border: #F1F1F1 solid 1px;
 }
 #next-client {
 	width: 100%;
