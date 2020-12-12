@@ -39,10 +39,12 @@ function search_fill(a) {
 	document.getElementById("myDropdown").style.display = 'none';
 }
 // Записаться
-function add_session() {
-	var specialist = document.getElementById('myInput').value;
-	var date = document.getElementById('session-date').value;
-	close_add_form();
+function form_show() {
+	document.getElementById('add-session-form1').style.display = 'none';
+	document.getElementById('add-session-btn').style.display = 'none';
+
+	document.getElementById('confirm-session-btn').style.display = 'block';
+	document.getElementById('time-variants-form').style.display = 'block';
 }
 
 // Меню подробнее
@@ -55,6 +57,7 @@ function more_info(referral) {
 	time.innerText = referral.childNodes[3].innerHTML + '    ' + referral.childNodes[5].innerHTML;
 }
 
+// Выбор времени приема
 function selection_time(button) {
 	if (button.className == 'time-variant selected') {
 		button.className = 'time-variant';

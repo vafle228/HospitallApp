@@ -1,57 +1,65 @@
 * {
 	margin: 0;
 	font-family: 'Segoe UI';
-	font-size: 50px;
+	font-size: 42px;
 	font-weight: 300;
 }
-.shadow {
-	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.08);
+h1 {
+	font-size: 40px;
+	text-align: center;
+	font-weight: 500;
+	margin-top: -20%;
 }
-body {
+section {
 	width: 100%;
-	height: 100%;
 }
-#background {
-	position: fixed;
-	bottom: 5%;
-	right: -5%;
-	height: 35%;
-	z-index: -1;
+button {
+	border: none;
+	border-radius: 40px;
+	width: 80%;
+	height: 140px;
+	background: linear-gradient(to bottom right, #3EC0F3, #6699FF);
+	outline: none;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
+	margin: 16px 10%;
+	color: #fff;
 }
 #logo {
-	width: 100%;
-	height: 30%;
+	height: 45%;
 	display: flex;
 	justify-content: center;
 }
-#log-in-form {
-	width: 100%;
-	height: auto;
-}
 form {
-	width: all;
-	height: 300px;
-	margin: 0 20px;
+	width: 98%;
+	height: auto;
+	margin: 0 1%;
+	position: absolute;
+	bottom: 0;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
+	border-radius: 40px;
+	padding-top: 5px;
+}
+#log-form, #reg-form {
+	display: none;
 }
 input {
 	border: none;
 	border-radius: 40px;
 	width: 100%;
-	height: 140px;
-	margin-bottom: 16px;
-	background: linear-gradient(to bottom right, #3EC0F3, #6699FF);
-	color: #fff;
+	height: 120px;
+	margin: 8px 0;
+	background-color: #fff;
+	color: #000;
 	outline: none;
 	padding: 0 60px;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
 }
 input::placeholder {
-	color: #fff;
+	color: #000;
 }
-button {
-	border: none;
-	border-radius: 40px;
-	width: 100%;
-	height: 140px;
-	background-color: #fff;
-	outline: none;
+.decorate {
+	background-color: #DFDFDF;
+	width: 200px;
+	height: 20px;
+	border-radius: 20px;
 }
