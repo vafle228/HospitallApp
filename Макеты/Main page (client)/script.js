@@ -1,16 +1,16 @@
 // Закрыть форму записи
 function close_add_form() {
 	var form = document.getElementById('add-session-form');
-	form.style.display = 'none';
+	form.style.bottom = '-100%';
 	var menu = document.getElementById('more-detailed-menu');
-	menu.style.display = 'none';
+	menu.style.bottom = '-100%';
 }
 // Открыть форму записи
 function open_add_form() {
 	var form = document.getElementById('add-session-form');
-	form.style.display = 'block';
+	form.style.bottom = '0';
 	var menu = document.getElementById('more-detailed-menu');
-	menu.style.display = 'none';
+	menu.style.bottom = '-100%';
 }
 
 // Поиск специалиста
@@ -50,7 +50,7 @@ function form_show() {
 // Меню подробнее
 function more_info(referral) {
 	var menu = document.getElementById('more-detailed-menu');
-	menu.style.display = 'block';
+	menu.style.bottom = '0';
 	var specialist = document.getElementById('specialist-name');
 	specialist.innerText = referral.childNodes[9].innerHTML;
 	var time = document.getElementById('time&date');
