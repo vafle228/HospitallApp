@@ -1,0 +1,77 @@
+* {
+	margin: 0;
+	font-family: 'Segoe UI';
+	font-size: 42px;
+	font-weight: 300;
+}
+h1 {
+	font-size: 40px;
+	text-align: center;
+	font-weight: 500;
+	margin-top: -20%;
+}
+section {
+	width: 100%;
+}
+body {
+	background-color: #fff;
+	transition: background-color 1s;
+}
+button {
+	border: none;
+	border-radius: 40px;
+	width: 80%;
+	height: 140px;
+	background: linear-gradient(to bottom right, #3EC0F3, #6699FF);
+	outline: none;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
+	margin: 16px 10%;
+	color: #fff;
+}
+#logo {
+	height: 45%;
+	display: flex;
+	justify-content: center;
+	transition: filter 1s;
+}
+form {
+	width: 98%;
+	height: auto;
+	margin: 0 1%;
+	position: absolute;
+	bottom: 0;
+	box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.2);
+	border-radius: 40px;
+	padding-top: 15px;
+	background-color: #fff;
+}
+#log-form, #reg-form {
+	position: absolute;
+	bottom: -100%;
+	transition: bottom 1s;
+}
+#choice {
+	transition: bottom 1s;
+}
+input {
+	border: none;
+	border-radius: 40px;
+	width: 98%;
+	height: 120px;
+	margin: 8px 1%;
+	background-color: #fff;
+	color: #000;
+	outline: none;
+	padding: 0 60px;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
+}
+input::placeholder {
+	color: #000;
+}
+.decorate {
+	background-color: #fff;
+	width: 200px;
+	height: 10px;
+	border-radius: 20px;
+	margin-top: -5%;
+}
