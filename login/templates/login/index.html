@@ -1,6 +1,4 @@
 {% load static %}
-<DOCTYPE html>
-<html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=no">
 	<link rel="stylesheet" href="{% static 'login/style.css' %}" type="text/css"/>
@@ -11,12 +9,16 @@
 		<img src="{% static 'login/logo.svg' %}" style='width: 50%'>
 	</section>
 	<h1>Добро пожаловать<br/>Войдите или зарегистрируйтесь</h1>
+	<section style='position: absolute; bottom: 8px' id='choice'>
+		<button onclick="log_form()" id='swap-to-log'>Войти</button>
+		<button onclick="reg_form()" id='swap-to-reg'>Зарегистрироваться</button>
+	</section>
 	<section>
 		<!-- Форма авторизации -->
 		<form id='log-form' action="{% url 'login-user' %}" method='POST'>
 			{% csrf_token %}
-			<div style='width: 100%; display: flex; justify-content: center; margin: 15px;'>
-				<div class='decorate' onclick="location.reload()"></div>
+			<div style='width: 100%; display: flex; justify-content: center'>
+				<div class='decorate' onclick="close_form()"></div>
 			</div>
 			<input placeholder="Электронная почта" name='email'/>
 			<input placeholder="Пароль" name='password' type="password"/>
@@ -25,8 +27,8 @@
 		<!-- Форма регистрации -->
 		<form id='reg-form' action="{% url 'register-user' %}" method='POST'>
 			{% csrf_token %}
-			<div style='width: 100%; display: flex; justify-content: center; margin: 15px;'>
-				<div class='decorate' onclick="location.reload()"></div>
+			<div style='width: 100%; display: flex; justify-content: center;'>
+				<div class='decorate' onclick="close_form()"></div>
 			</div>
 			<input placeholder="ФИО" name='name'/>
 			<input placeholder="Электронная почта" name='email'/>
@@ -35,10 +37,5 @@
 			<button id='reg-btn' type='submit'>Зарегистрироваться</button>
 		</form>
 	</section>
-	<section style='position: absolute; bottom: 8px' id='choice'>
-		<button onclick="log_form()" id='swap-to-log'>Войти</button>
-		<button onclick="reg_form()" id='swap-to-reg'>Зарегистрироваться</button>
-	</section>
 	<script src="{% static 'login/script.js' %}"></script>
 </body>
-</html>
