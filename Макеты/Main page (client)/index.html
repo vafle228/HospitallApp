@@ -5,13 +5,11 @@
 </head>
 <body>
 	<header>
-		<section>
-			<img src='logo.svg' style='height: 64px'/>
-			<div>
-				<img src='plus.svg' style='height: 120px'/>
-				<img src='plus.svg' style='height: 120px'/>
-			</div>
-		</section>
+		<img src='logo.svg' style='height: 100%'/>
+		<div style='display: flex; width: 23%; justify-content: space-between;'>
+			<img src='notification.svg' style='max-height: 100%; width: 80px'/>
+			<img src='settings.svg' style='max-height: 100%; width: 80px'/>
+		</div>
 	</header>
 	<main>
 		<div class='referral' onclick='more_info(this)'>
@@ -66,14 +64,14 @@
 	</main>
 	<div id='nav-container'>
 		<nav class='shadow'>
-			<button onclick="open_add_form()"><img src='home-btn.svg'/></button>
-			<button><img src='add-btn.svg'/></button>
+			<button><img src='home-btn.svg'/></button>
+			<button onclick="open_add_form()"><img src='add-btn.svg'/></button>
 			<button><img src='bookmark.svg'/></button>
 			<button><img src='profile-btn.svg'/></button>
 		</nav>
 	</div>
-	<section id='more-detailed-menu'>
-		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
+	<section id='more-detailed-menu' class='disactive'>
+		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_form()"><div class='decorate'></div></div>
 		<section id='info'>
 			<div id='time & date'>
 				<h1>Запись</h1>
@@ -94,12 +92,11 @@
 		</section>
 		<section id='status'>
 			<h1>Статус</h1>
-
 		</section>
 		<button id='late'>Опаздываю</button>
 		<button id='cancel'>Отменить запись</button></section>
-	<section id='add-session-form'>
-		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
+	<section id='add-session-form' class='disactive'>
+		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_form()"><div class='decorate'></div></div>
 		<div id='add-session-form1'>
 			<div style='overflow-y: scroll;'>
 				<form id='specialist-form'>
@@ -122,32 +119,75 @@
 					<h1>Выберите дату</h1>
 					<input type='date' id='session-date' style='color: #fff'/>
 				</form>
-				<form id='time-form'>
-					<h1>Введите желаемое время</h1>
-					<input placeholder="8:00"/>
-				</form>
 			</div>
 		</div>
-		<div id='time-variants-form' style='display: none'>
-		<h1 style='text-align: center;'>Ваше время занято</h1>
-		<h1 style='text-align: center;'>Выберите время приема</h1>
-		<div id='time-container'>
-			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
-			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
-			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
-			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
-			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
-			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
-			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
-			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
-			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
-			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
-			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
-			<button class='time-variant' onclick='selection_time(this)'>13:40 (04.12)</button>
-		</div>
+		<div id='add-session-form2' style='display: none'>
+			<h1 style='text-align: center;'>Запись на прием</h1>
+			<h1 style='text-align: center;'>Выберите время приема</h1>
+			<div id='time-container'>
+				<button>
+					<img src='double-arrow.svg' class='left-double-arrow'/>
+					15.12.2020 ВТ
+					<img src='double-arrow.svg' class='right-double-arrow'/>
+				</button>
+				<div onclick='specialist_table(this)' class='disactive'>
+					<button>
+						<img src='arrow.svg' class='left-arrow'/>Петрова Н.Д
+					</button>
+					<table>
+						<tr>
+							<td class='variant-specialist-name'>Петрова Н.Д</td>
+							<td class='variant-date'>15.12</td>
+							<td class='variant-time'>11:55</td>
+							<td class='variant-confirm'><img src='confirm.svg' height="90px"/></td>
+						</tr>
+						<tr>
+							<td class='variant-specialist-name'>Петрова Н.Д</td>
+							<td class='variant-date'>15.12</td>
+							<td class='variant-time'>11:55</td>
+							<td class='variant-confirm'><img src='confirm.svg' height="90px"/></td>
+						</tr>
+						<tr>
+							<td class='variant-specialist-name'>Петрова Н.Д</td>
+							<td class='variant-date'>15.12</td>
+							<td class='variant-time'>11:55</td>
+							<td class='variant-confirm'><img src='confirm.svg' height="90px"/></td>
+						</tr>
+					</table>
+				</div>
+				<div onclick='specialist_table(this)' class='disactive'>
+					<button>
+						<img src='arrow.svg' class='left-arrow'/>Кузнецов К.А
+					</button>
+					<table>
+						<tr>
+							<td class='variant-specialist-name'>Петрова Н.Д</td>
+							<td class='variant-date'>15.12</td>
+							<td class='variant-time'>11:55</td>
+							<td class='variant-confirm'><img src='confirm.svg' height="90px"/></td>
+						</tr>
+						<tr>
+							<td class='variant-specialist-name'>Петрова Н.Д</td>
+							<td class='variant-date'>15.12</td>
+							<td class='variant-time'>11:55</td>
+							<td class='variant-confirm'><img src='confirm.svg' height="90px"/></td>
+						</tr>
+					</table>
+				</div>
+				<div onclick='specialist_table(this)' class='disactive'>
+					<button>
+						<img src='arrow.svg' class='left-arrow'/>Иванова Т.А
+					</button>
+				</div>
+				<div onclick='specialist_table(this)' class='disactive'>
+					<button>
+						<img src='arrow.svg' class='left-arrow'/>Воробьев А.П
+					</button>
+				</div>
+			</div>
 		</div>
 		<button id='add-session-btn' class='shadow' onclick="form_show()"><h1>Записаться</button>
-		<button id='confirm-session-btn' class='shadow' onclick="close_add_form()"><h1>Записаться</button>
+		<button id='confirm-session-btn' class='shadow' onclick="form_back()"><h1>Назад</button>
 		</section>
 	<script src='script.js'></script>
 </body>
