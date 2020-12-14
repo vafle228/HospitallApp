@@ -166,7 +166,7 @@ h1, p {
 }
 #add-session-form form {
 	width: 96%;
-	height: 240px;
+	height: auto;
 	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
 	margin: 20px 0;
 	border-radius: 40px;
@@ -192,11 +192,12 @@ h1, p {
 	margin-top: 30px;
 	outline: none;
 	padding: 0 5%;
+	color: #fff;
 }
 
 #add-session-form form input::placeholder {color: #fff;}
 
-#myInput {
+.dropdown-input {
   font-size: 36px;
   color: #fff;
   border: none;
@@ -204,8 +205,7 @@ h1, p {
   width: 100%;
 }
 
-#myInput:focus {outline: 3px solid #ddd;}
-
+.dropdown-input:focus {outline: 3px solid #ddd;}
 
 .dropdown {
   position: relative;

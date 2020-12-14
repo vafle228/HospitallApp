@@ -23,19 +23,16 @@ function open_add_form() {
 }
 
 // Поиск специалиста
-function filterFunction() {
-	document.getElementById("myDropdown").style.display = 'block';
-	var input, filter, ul, li, a, i;
-	input = document.getElementById("myInput");
-	filter = input.value.toUpperCase();
-	div = document.getElementById("myDropdown");
-	a = div.getElementsByTagName("a");
-	for (i = 0; i < a.length; i++) {
+function filterFunction(input) {
+	input.nextElementSibling.style.display = 'block';
+	var filter = input.value.toUpperCase();
+	var drops = input.nextElementSibling;
+	var a = drops.getElementsByTagName("a");
+	for (var i = 0; i < a.length; i++) {
 		txtValue = a[i].textContent || a[i].innerText;
 		if (txtValue.toUpperCase().indexOf(filter) > -1) {
-			a[i].style.display = "";
-		} 
-		else {
+			a[i].style.display = "block";
+		} else {
 			a[i].style.display = "none";
 		}
 	}
@@ -43,12 +40,42 @@ function filterFunction() {
 
 // Выбор специалиста
 function search_fill(a) {
-	var input = document.getElementById("myInput");
+	var input = a.parentElement.previousElementSibling;
 	input.value = a.textContent;
-	document.getElementById("myDropdown").style.display = 'none';
+	a.parentElement.style.display = 'none';
 }
+
+
+var now = new Date();
+var date = now.getDate();
+var month = now.getMonth();
+var year = now.getFullYear();
+var day = now.getDay()
+
+// Построение и установка на слайдер даты
+function date_build(date, month, year, day) {
+	var days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+	document.getElementById('date-slider').innerHTML = 
+	String(date) + '.' + String(month + 1) + '.' + 
+	String(year) + ' ' + days[day];
+}
+
+function next_date() {
+	date += 1; month = month; year = year; day += 1;
+	var next_date = new Date(year, month, date);
+	date_build(next_date.getDate(), next_date.getMonth(), next_date.getFullYear(), next_date.getDay());
+}
+function previous_date() {
+	date -= 1; month = month; year = year; day -= 1;
+	var previous_date = new Date(year, month, date);
+	date_build(previous_date.getDate(), previous_date.getMonth(), previous_date.getFullYear(), previous_date.getDay());
+}
+
 // Перейти к выбору времени
 function form_show() {
+
+	date_build(date, month, year, day);
+
 	document.getElementById('add-session-form1').style.display = 'none';
 	document.getElementById('add-session-btn').style.display = 'none';
 

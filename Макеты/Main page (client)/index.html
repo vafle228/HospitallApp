@@ -73,22 +73,10 @@
 	<section id='more-detailed-menu' class='disactive'>
 		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_form()"><div class='decorate'></div></div>
 		<section id='info'>
-			<div id='time & date'>
-				<h1>Запись</h1>
-				<p id='time&date'>16:15    08.11</p>
-			</div>
-			<div id='addres'>
-				<h1>Адрес</h1>
-				<p>Буторина 10</p>
-			</div>
-			<div id='specialist'>
-				<h1>Специалист</h1>
-				<p id='specialist-name'>Хирург</p>
-			</div>
-			<div id='cabinet'>
-				<h1>Кабинет</h1>
-				<p>301</p>
-			</div>
+			<div id='time & date'><h1>Запись</h1><p id='time&date'></p></div>
+			<div id='addres'><h1>Адрес</h1><p>Буторина 10</p></div>
+			<div id='specialist'><h1>Специалист</h1><p id='specialist-name'></p></div>
+			<div id='cabinet'><h1>Кабинет</h1><p>301</p></div>
 		</section>
 		<section id='status'>
 			<h1>Статус</h1>
@@ -96,14 +84,16 @@
 		<button id='late'>Опаздываю</button>
 		<button id='cancel'>Отменить запись</button></section>
 	<section id='add-session-form' class='disactive'>
-		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_form()"><div class='decorate'></div></div>
+		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_form()">
+			<div class='decorate'></div>
+		</div>
 		<div id='add-session-form1'>
-			<div style='overflow-y: scroll;'>
-				<form id='specialist-form'>
+			<div style='overflow-y: scroll; height: 50vh'>
+				<form id='specialist-form' class='dropdown-form'>
 					<h1>Выберите специалиста</h1>
 					<div class="dropdown" style='width: 100%'>
-					  <input placeholder="Поиск" id="myInput" onkeyup="filterFunction()">
-					  <div id="myDropdown" class="dropdown-content">
+					  <input placeholder="Поиск" onkeyup="filterFunction(this)"/>
+					  <div class="dropdown-content">
 					    <a onclick="search_fill(this)">Офтальмолог</a>
 					    <a onclick="search_fill(this)">Хирург</a>
 					    <a onclick="search_fill(this)">Психиатр</a>
@@ -115,21 +105,32 @@
 					  </div>
 					</div>
 				</form>
-				<form id='date-form'>
+<!-- 			<form id='date-form'>
 					<h1>Выберите дату</h1>
-					<input type='date' id='session-date' style='color: #fff'/>
+					<input type='date' id='session-date'/>
+				</form> -->
+				<form id='reason-form'>
+					<h1>Выберите причину посещения</h1>
+					<div class="dropdown" style='width: 100%'>
+					  <input placeholder="Поиск" class='dropdown-input' onkeyup="filterFunction(this)"/>
+					  <div class="dropdown-content">
+					    <a onclick="search_fill(this)">Осмотр</a>
+					    <a onclick="search_fill(this)">Консультация</a>
+					    <a onclick="search_fill(this)">Другое</a>
+					  </div>
+					</div>
 				</form>
 			</div>
 		</div>
 		<div id='add-session-form2' style='display: none'>
-			<h1 style='text-align: center;'>Запись на прием</h1>
-			<h1 style='text-align: center;'>Выберите время приема</h1>
+			<h1 style='text-align: center'>Запись на прием</h1>
+			<h1 style='text-align: center'>Выберите время приема</h1>
 			<div id='time-container'>
 				<!-- Выбор даты -->
 				<button>
-					<img src='double-arrow.svg' class='left-double-arrow'/>
-					15.12.2020 ВТ
-					<img src='double-arrow.svg' class='right-double-arrow'/>
+					<img src='double-arrow.svg' class='left-double-arrow' onclick='previous_date()'/>
+					<p id='date-slider' style='font-size: 48px; font-weight: 600'><p>
+					<img src='double-arrow.svg' class='right-double-arrow' onclick='next_date()'/>
 				</button>
 				<div>
 					<button onclick='specialist_table(this)' class='disactive'>
