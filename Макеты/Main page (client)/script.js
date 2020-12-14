@@ -85,12 +85,12 @@ function more_info(referral) {
 
 function specialist_table(specialist) {
 	if (specialist.className == 'disactive') {
-		specialist.childNodes[3].style.display = 'block';
+		specialist.nextElementSibling.style.display = 'block';
 		specialist.className = 'active';
-		specialist.childNodes[1].childNodes[1].style.transform = 'rotate(180deg)';
+		specialist.childNodes[1].style.transform = 'rotate(180deg)';
 	} else {
-		specialist.childNodes[3].style.display = 'none';
+		specialist.nextElementSibling.style.display = 'none';
 		specialist.className = 'disactive';
-		specialist.childNodes[1].childNodes[1].style.transform = 'rotate(90deg)';
+		specialist.childNodes[1].style.transform = 'rotate(90deg)';
 	}
 }
