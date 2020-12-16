@@ -5,6 +5,9 @@ from login.models import Appointment, HospitalUser, Doctor
 from .insertClient import insertClient
 from .forms import AppointmentForm
 
+doctors = ["Офтальмолог", "Хирург", "Психиатр", "Оттолоринголог", "Стоматолог", "Невролог", "Педиатр", "Кардиолог"]
+reason = ["Заболел и пришел в первый раз", "На повторный прием", "На выписку"]
+
 
 def userPage(request, identifier):
     if User.objects.filter(pk=identifier).exists():
@@ -19,33 +22,33 @@ def userPage(request, identifier):
 
 def appointmentCheck(request, identifier):
     if User.objects.filter(pk=identifier).exists():
-        user = User.objects.filter(pk=identifier)[0]
+        user, variants = User.objects.filter(pk=identifier)[0], {}
 
         if request.method == "POST" and request.user == user and request.user.is_authenticated:
-            form = AppointmentForm(request.POST)
-            if form.is_valid():
-                variants, client_referral = [], createReferral(request.user, form.cleaned_data['date'])
-                time, date = ':'.join(str(form.cleaned_data['time']).split(':')[:2]), form.cleaned_data['date']
+            specialist = request.POST['specialist']
+            appeal = request.POST['appeal']
+            date = request.POST['date']
 
-                for doctor in Doctor.objects.filter(profession=form.cleaned_data['specialist']):
-                    variant = insertClient(time, 600, createQue(doctor, date), client_referral, date, doctor)
-                    if isinstance(variant, dict):
-                        return JsonResponse([True, variant], safe=False)
-                    variants += variant
-                return JsonResponse([False, variants], safe=False)
-    return HttpResponse("Error")
+            if specialist not in doctors or appeal not in reason:
+                return HttpResponse('Error')
+
+            for doctor in Doctor.objects.filter(profession=specialist):
+                doctor_name = doctor.doctor_name.name.username
+                que, client_referral = createQue(doctor, date), createReferral(user, date)
+                variants[doctor_name] = insertClient(600, que, client_referral, date, doctor)
+            return JsonResponse(variants)
+    return HttpResponse('Error')
 
 
 def appointmentCreate(request, identifier):
     if User.objects.filter(pk=identifier).exists():
         user = User.objects.filter(pk=identifier)[0]
         if request.method == "POST" and request.user == user and request.user.is_authenticated:
-            data = {'specialist': Doctor.objects.filter(pk=request.POST['specialist'])}
             form = AppointmentForm(request.POST)
             if form.is_valid():
-                # form.save(variant, HospitalUser.objects.filter(name=user))
-                return redirect(f'/main/{request.user.pk}')
-        return redirect(f'/main/{request.user.pk}')
+                form.save(user)
+                return HttpResponse(f'/main/{user.pk}')
+    return HttpResponse('/login/')
 
 
 def createQue(doctor, date):

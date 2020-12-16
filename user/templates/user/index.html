@@ -1,17 +1,17 @@
 {% load static %}
-<DOCTYPE html>
-<html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=0.4, user-scalable=no">
 	<link rel="stylesheet" href="{% static 'user/style.css' %}" type="text/css"/>
 	<title>Главная</title>
-	<style>
-		::-webkit-calendar-picker-indicator {
-		  background: url("{% static 'user/icons/calendar.svg' %}");
-		}
-	</style>
 </head>
 <body>
+	<header>
+		<img src="{% static 'user/icons/logo.svg' %}" style='height: 100%'/>
+		<div style='display: flex; width: 23%; justify-content: space-between;'>
+			<img src="{% static 'user/icons/notification.svg' %}" style='max-height: 100%; width: 80px'/>
+			<img src="{% static 'user/icons/settings.svg' %}" style='max-height: 100%; width: 80px'/>
+		</div>
+	</header>
 	<main>
 	{% for appointment in appointments %}
 		<div class='referral' style="background: url({% static 'user/icons/referralbackground.svg' %}); background-size: cover;" onclick='more_info(this)'>
@@ -40,45 +40,35 @@
 	<div id='nav-container'>
 		<nav class='shadow'>
 			<button><img src="{% static 'user/icons/home-btn.svg' %}"/></button>
-			<button onclick="open_add_form();"><img src="{% static 'user/icons/add-btn.svg' %}"/></button>
+			<button onclick="open_add_form()"><img src="{% static 'user/icons/add-btn.svg' %}"/></button>
 			<button><img src="{% static 'user/icons/bookmark.svg' %}"/></button>
 			<button><img src="{% static 'user/icons/profile-btn.svg' %}"/></button>
 		</nav>
-	<section id='more-detailed-menu'>
-		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
+	</div>
+	<section id='more-detailed-menu' class='disactive'>
+		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_form()"><div class='decorate'></div></div>
 		<section id='info'>
-			<div id='time & date'>
-				<h1>Запись</h1>
-				<p id='time&date'>16:15    08.11</p>
-			</div>
-			<div id='addres'>
-				<h1>Адрес</h1>
-				<p>Буторина 10</p>
-			</div>
-			<div id='specialist'>
-				<h1>Специалист</h1>
-				<p id='specialist-name'>Хирург</p>
-			</div>
-			<div id='cabinet'>
-				<h1>Кабинет</h1>
-				<p>301</p>
-			</div>
+			<div id='time & date'><h1>Запись</h1><p id='time&date'></p></div>
+			<div id='addres'><h1>Адрес</h1><p>Буторина 10</p></div>
+			<div id='specialist'><h1>Специалист</h1><p id='specialist-name'></p></div>
+			<div id='cabinet'><h1>Кабинет</h1><p>301</p></div>
 		</section>
 		<section id='status'>
 			<h1>Статус</h1>
-
 		</section>
 		<button id='late'>Опаздываю</button>
 		<button id='cancel'>Отменить запись</button></section>
-	<section id='add-session-form'>
-		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_add_form()"><div class='decorate'></div></div>
+	<section id='add-session-form' class='disactive'>
+		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_form(); form_back()">
+			<div class='decorate'></div>
+		</div>
 		<div id='add-session-form1'>
-			<div style='overflow-y: scroll;'>
-				<form id='specialist-form'>
+			<div style='overflow-y: scroll; height: 50vh'>
+				<form id='specialist-form' class='dropdown-form'>
 					<h1>Выберите специалиста</h1>
 					<div class="dropdown" style='width: 100%'>
-					  <input placeholder="Поиск" id="myInput" onkeyup="filterFunction()" autocomplete="off">
-					  <div id="myDropdown" class="dropdown-content">
+					  <input placeholder="Поиск" onkeyup="filterFunction(this)" id="doctor"/>
+					  <div class="dropdown-content">
 					    <a onclick="search_fill(this)">Офтальмолог</a>
 					    <a onclick="search_fill(this)">Хирург</a>
 					    <a onclick="search_fill(this)">Психиатр</a>
@@ -90,69 +80,43 @@
 					  </div>
 					</div>
 				</form>
-				<form id='date-form'>
-					<h1>Выберите дату</h1>
-					<input type='date' id='session-date' style='color: #fff'/>
-				</form>
-				<form id='time-form'>
-					<h1>Введите желаемое время</h1>
-					<input placeholder="8:00" id="time-input" style="color: #fff" autocomplete="off" />
+				<form id='reason-form'>
+					<h1>Выберите причину посещения</h1>
+					<div class="dropdown" style='width: 100%'>
+					  <input placeholder="Поиск" class='dropdown-input' id="appeal" onkeyup="filterFunction(this)"/>
+					  <div class="dropdown-content">
+					    <a onclick="search_fill(this)">Осмотр</a>
+					    <a onclick="search_fill(this)">Консультация</a>
+					    <a onclick="search_fill(this)">Другое</a>
+					  </div>
+					</div>
 				</form>
 			</div>
 		</div>
-		<div id='time-variants-form' style='display: none'>
-		<h1 style='text-align: center;'>Ваше время занято</h1>
-		<h1 style='text-align: center;'>Выберите время приема</h1>
-		<div id='time-container'>
+		<div id='add-session-form2' style='display: none'>
+			<h1 style='text-align: center'>Запись на прием</h1>
+			<h1 style='text-align: center'>Выберите время приема</h1>
+			<div id='time-container'>
+				<!-- Выбор даты -->
+				<button id="slide-btn">
+					<img src="{% static 'user/icons/double-arrow.svg' %}" class='left-double-arrow' onclick="previous_date('{{ id }}', '{{ csrf_token }}')"/>
+					<p id='date-slider' style='font-size: 48px; font-weight: 600'><p>
+					<img src="{% static 'user/icons/double-arrow.svg' %}" class='right-double-arrow' onclick="next_date('{{ id }}', '{{ csrf_token }}')"/>
+				</button>
+				<div id="variants">
+					<!-- Варианты -->
+				</div>
+			</div>
 		</div>
-		</div>
-		<button id='add-session-btn' class='shadow'><h1>Записаться</button>
-		<button id='confirm-session-btn' class='shadow' onclick="close_add_form()"><h1>Записаться</button>
-		</section>
+		<button id='add-session-btn' class='shadow' onclick="getVariants('{{ id }}', '{{ csrf_token }}'); form_show()">
+			<h1>Записаться</h1>
+		</button>
+		<button id='confirm-session-btn' class='shadow' onclick="form_back()"><h1>Назад</button>
+	</section>
 	<script type="text/javascript" src="{% static 'user/jquery-3.5.1.min.js' %}"></script>
 	<script src="{% static 'user/script.js' %}"></script>
 	<script>
-		$("#add-session-btn").click(function() {
-			$.ajax({
-				type: "POST",
-				url: "/main/appointment_check/" + "{{ id }}",
-				data: {
-					specialist: $("#myInput").val(),
-					date: $("#session-date").val(),
-					time: $("#time-input").val(),
-					appeal: 'Заболел',
-					csrfmiddlewaretoken: "{{ csrf_token }}"
-				},
-				cache: false,
-				success: function(response){
-					if(response[0] == true){
-						$.post({
-							url: "/main/appointment_create/" + "{{ id }}",
-							data: {
-								specialist: response[1]['specialist'],
-								date: response[1]['date'],
-								time: response[1]['time'],
-								appeal: response[1]['appeal'],
-								csrfmiddlewaretoken: "{{ csrf_token }}"
-							},
-						})
-					}
-					form_show()
-					for(let i =0; i < response[1].length; i++){
-						let button = document.createElement('button');
-						let date = `${response[i]["date"].split("-")[2]}.${response[i]["date"].split("-")[1]}`
-						button.className = 'time-variant';
-						button.name = response[i]['doctor'];
-						button.innerHTML = `${response[i]["time"]} (${date})`;
-						button.onclick = function(){
-							selection_time(button);
-						}
-						document.getElementById('time-container').appendChild(button)
-					}
-				}
-			})
-			return false;
-		})
+		let confirm = "{% static 'user/icons/confirm.svg' %}"
+		let arrow = "{% static 'user/icons/arrow.svg' %}"
 	</script>
 </body>
-</html>

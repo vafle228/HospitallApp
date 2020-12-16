@@ -25,39 +25,27 @@ def isFreeTime(startTime, endTime, que, client_referral):
     return True
 
 
-def createVariants(clients, waitTime, doctor, date):
-    variants = []
-    for client in clients:
-        variant = ({'time': client['endTime'],
-                    'endTime': swapToTime(swapToSec(client['endTime']) + waitTime),
-                    'doctor': doctor.pk,
-                    'date': date})
-        if variant not in variants:
-            variants.append(variant)
-    return variants
+def clientAppointment(waitTime, que, client_referral, doctor, date):
+    backup_clients = []
 
-
-def clientAppointment(wishedTime, waitTime, que, client_referral, doctor, date):
-    backup_clients = [{'time': '0:00', 'endTime': '0:00', 'doctor': None, 'date': '01:01'}]
-
-    if isFreeTime(wishedTime, swapToTime(swapToSec(wishedTime) + waitTime), que, client_referral):
-        return {'time': wishedTime,
-                'endTime': swapToTime(swapToSec(wishedTime) + waitTime),
-                'doctor': doctor,
-                'date': date}
+    for time in range(8, 23):
+        if isFreeTime(swapToTime(3600 * time), swapToTime(time * 3600 + waitTime), que, client_referral):
+            backup_clients.append({'time': swapToTime(3600 * time),
+                                   'endTime': swapToTime(time * 3600 + waitTime),
+                                   'doctor': doctor.pk,
+                                   'date': date})
 
     for client in que:
-        for backup_client in backup_clients:
-            time = swapToTime(waitTime + swapToSec(client['endTime']))
-            if abs(swapToSec(wishedTime) - swapToSec(backup_client['endTime'])) > \
-                    abs(swapToSec(wishedTime) - swapToSec(client['endTime'])) \
-                    and isFreeTime(client['endTime'], time, que, client_referral):
-                backup_clients.append(client)
-    return createVariants(backup_clients[1:], waitTime, doctor, date)
+        if isFreeTime(client['endTime'], swapToTime(swapToSec(client['endTime']) + waitTime), que, client_referral):
+            backup_clients.append({'time': client['endTime'],
+                                   'endTime': swapToTime(swapToSec(client['endTime']) + waitTime),
+                                   'doctor': doctor.pk,
+                                   'date': date})
+    return backup_clients
 
 
-def insertClient(wishedTime, waitTime, que, client_referral, date, doctor):
-    return clientAppointment(wishedTime, waitTime, que, client_referral, doctor, date)
+def insertClient(waitTime, que, client_referral, date, doctor):
+    return clientAppointment(waitTime, que, client_referral, doctor, date)
 
 # 8:00 -> 10 => 8:00 до 8:10
 # 8:00 -> 5 => 8:10 до 8:15
