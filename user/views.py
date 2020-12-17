@@ -7,7 +7,7 @@ from .forms import AppointmentForm
 from datetime import datetime
 
 doctors = ["Офтальмолог", "Хирург", "Психиатр", "Оттолоринголог", "Стоматолог", "Невролог", "Педиатр", "Кардиолог"]
-reason = ["Заболел и пришел в первый раз", "На повторный прием", "На выписку"]
+reason = ["Выписка", "Прием", "Заболел"]
 
 
 def userPage(request, identifier):

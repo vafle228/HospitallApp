@@ -14,7 +14,7 @@
 	</header>
 	<main>
 	{% for appointment in appointments %}
-		<div class='referral' style="background: url({% static 'user/icons/referralbackground.svg' %}); background-size: cover;" onclick='more_info(this)'>
+		<div class='referral' style="background: url({% static 'user/icons/referralbackground.svg' %}); background-size: cover;" onclick='more_info(this)' name="{{ appointment.pk }}">
 			<h2 class='referral-header'>Запись</h2>
 			<h2 class='time'>{{ appointment.appointment_start|time:"H:i" }}</h2>
 			<h2 class='date'>{{ appointment.appointment_date|date:"j.m" }}</h2>
@@ -76,7 +76,7 @@
 				<form id='specialist-form' class='dropdown-form'>
 					<h1>Выберите специалиста</h1>
 					<div class="dropdown" style='width: 100%'>
-					  <input placeholder="Поиск" onkeyup="filterFunction(this)" id="doctor"/>
+					  <input placeholder="Поиск" onkeyup="filterFunction(this)" id="doctor" autocomplete="off"/>
 					  <div class="dropdown-content">
 					    <a onclick="search_fill(this)">Офтальмолог</a>
 					    <a onclick="search_fill(this)">Хирург</a>
@@ -92,11 +92,11 @@
 				<form id='reason-form'>
 					<h1>Выберите причину посещения</h1>
 					<div class="dropdown" style='width: 100%'>
-					  <input placeholder="Поиск" class='dropdown-input' id="appeal" onkeyup="filterFunction(this)"/>
+					  <input placeholder="Поиск" class='dropdown-input' id="appeal" onkeyup="filterFunction(this)" autocomplete="off" />
 					  <div class="dropdown-content">
-					    <a onclick="search_fill(this)">Осмотр</a>
-					    <a onclick="search_fill(this)">Консультация</a>
-					    <a onclick="search_fill(this)">Другое</a>
+					    <a onclick="search_fill(this)">Заболел</a>
+					    <a onclick="search_fill(this)">Прием</a>
+					    <a onclick="search_fill(this)">Выписка</a>
 					  </div>
 					</div>
 				</form>

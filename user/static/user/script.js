@@ -139,7 +139,9 @@ function createVariantsTable(variants, csrf_token, id, appeal){
 
 		button.className = 'disactive';
 		button.onclick = function() { specialist_table(button) };
-		button.innerHTML = doctor_name;
+		button.innerHTML = doctor_name.split(' ')[0] + ' ' 
+						   + doctor_name.split(' ')[1][0] + '.' 
+						   + doctor_name.split(' ')[2][0] + '.';
 
 		for(let i in variants[doctor_name]){
 			let appointment_date = variants[doctor_name][i]['date'].split('-')
