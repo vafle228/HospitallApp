@@ -14,7 +14,7 @@
 	</header>
 	<main>
 	{% for appointment in appointments %}
-		<div class='referral' style="background: url({% static 'user/icons/referralbackground.svg' %}); background-size: cover;" onclick='more_info(this)' name="{{ appointment.pk }}">
+		<div class='referral' style="background: url({% static 'user/icons/referralbackground.svg' %}); background-size: cover;" onclick='more_info(this, "{{ id }}", "{{ csrf_token }}")' name="{{ appointment.pk }}">
 			<h2 class='referral-header'>Запись</h2>
 			<h2 class='time'>{{ appointment.appointment_start|time:"H:i" }}</h2>
 			<h2 class='date'>{{ appointment.appointment_date|date:"j.m" }}</h2>
@@ -48,7 +48,7 @@
 	</main>
 	<div id='nav-container'>
 		<nav class='shadow'>
-			<button><img src="{% static 'user/icons/home-btn.svg' %}"/></button>
+			<button onclick="location.href = 'appointment_logout/{{ id }}'"><img src="{% static 'user/icons/home-btn.svg' %}"/></button>
 			<button onclick="open_add_form()"><img src="{% static 'user/icons/add-btn.svg' %}"/></button>
 			<button><img src="{% static 'user/icons/bookmark.svg' %}"/></button>
 			<button><img src="{% static 'user/icons/profile-btn.svg' %}"/></button>
@@ -66,7 +66,9 @@
 			<h1>Статус</h1>
 		</section>
 		<button id='late'>Опаздываю</button>
-		<button id='cancel'>Отменить запись</button></section>
+		<button id='cancel1' onclick='cancel_session(this)'>Отменить запись</button>
+		<button id='cancel2' style='display: none'>Подтвердить удаление</button>
+	</section>
 	<section id='add-session-form' class='disactive'>
 		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_form();">
 			<div class='decorate'></div>

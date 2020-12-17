@@ -98,7 +98,7 @@ function form_back() {
 
 
 // Меню подробнее
-function more_info(referral) {
+function more_info(referral, id, csrf_token) {
 	var form = document.getElementById('add-session-form');
 	var menu = document.getElementById('more-detailed-menu');
 	if (menu.className == 'disactive' && form.className == 'disactive') {
@@ -111,6 +111,8 @@ function more_info(referral) {
 		document.getElementsByTagName('body')[0].style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
 		document.getElementsByTagName('main')[0].style.filter = 'brightness(0.6)';
 		document.getElementsByTagName('header')[0].style.filter = 'brightness(0.6)';
+
+		$("#cancel2")[0].onclick = function() { deleteAppointment(referral.getAttribute("name"), id, csrf_token) }
 	}
 }
 
@@ -230,4 +232,20 @@ function clearVariants(){
 	while(variants.firstChild) {
 	    variants.removeChild(variants.firstChild);
 	}
+}
+
+function cancel_session(btn1) {
+	btn1.style.display = 'none';
+	document.getElementById('cancel2').style.display = 'block';
+}
+
+function deleteAppointment(appointment, id, csrf_token){
+	$.post({
+		url: "/main/appointment_delete/" + String(id),
+		data: {
+			appointment: appointment,
+			csrfmiddlewaretoken: csrf_token
+		},
+		success: function(response) { location.href = location.origin + response }
+	})
 }

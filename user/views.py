@@ -5,9 +5,15 @@ from login.models import Appointment, HospitalUser, Doctor
 from .insertClient import insertClient
 from .forms import AppointmentForm
 from datetime import datetime
+from django.contrib.auth import logout
 
 doctors = ["Офтальмолог", "Хирург", "Психиатр", "Оттолоринголог", "Стоматолог", "Невролог", "Педиатр", "Кардиолог"]
 reason = ["Выписка", "Прием", "Заболел"]
+
+
+def logoutUser(request, identifier):
+    logout(request)
+    return redirect('/login/')
 
 
 def userPage(request, identifier):
@@ -46,9 +52,19 @@ def appointmentCreate(request, identifier):
     if User.objects.filter(pk=identifier).exists():
         user = User.objects.filter(pk=identifier)[0]
         if request.method == "POST" and request.user == user and request.user.is_authenticated:
-            form = AppointmentForm(request.POST)
+            form = AppointmentForm()
             if form.is_valid():
                 form.save(user)
+            return HttpResponse(f'/main/{user.pk}')
+    return HttpResponse('/login/')
+
+
+def appointmentRemove(request, identifier):
+    if User.objects.filter(pk=identifier).exists():
+        user = User.objects.filter(pk=identifier)[0]
+        if request.method == "POST" and request.user == user and request.user.is_authenticated:
+            if Appointment.objects.filter().exists():
+                Appointment.objects.filter(pk=request.POST['appointment']).delete()
             return HttpResponse(f'/main/{user.pk}')
     return HttpResponse('/login/')
 

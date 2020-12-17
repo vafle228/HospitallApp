@@ -148,7 +148,7 @@ h1, p {
 #late {
 	background: linear-gradient(to right, #3EC0F3, #6699FF);
 }
-#cancel {
+#cancel1, #cancel2 {
 	background: linear-gradient(to right, #F43271, #F89571);
 }
 
