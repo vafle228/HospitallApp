@@ -52,7 +52,7 @@ def appointmentCreate(request, identifier):
     if User.objects.filter(pk=identifier).exists():
         user = User.objects.filter(pk=identifier)[0]
         if request.method == "POST" and request.user == user and request.user.is_authenticated:
-            form = AppointmentForm()
+            form = AppointmentForm(request.POST)
             if form.is_valid():
                 form.save(user)
             return HttpResponse(f'/main/{user.pk}')
