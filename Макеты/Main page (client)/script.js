@@ -121,3 +121,8 @@ function specialist_table(specialist) {
 		specialist.childNodes[1].style.transform = 'rotate(90deg)';
 	}
 }
+
+function cancel_session(btn1) {
+	btn1.style.display = 'none';
+	document.getElementById('cancel2').style.display = 'block';
+}
