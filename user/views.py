@@ -47,7 +47,7 @@ def appointmentCreate(request, identifier):
             form = AppointmentForm(request.POST)
             if form.is_valid():
                 form.save(user)
-                return HttpResponse(f'/main/{user.pk}')
+            return HttpResponse(f'/main/{user.pk}')
     return HttpResponse('/login/')
 
 

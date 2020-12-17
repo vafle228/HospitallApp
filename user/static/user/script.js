@@ -94,9 +94,6 @@ function form_back() {
 
 	document.getElementById('add-session-form1').style.display = 'block';
 	document.getElementById('add-session-btn').style.display = 'block';
-
-	$("#doctor")[0].value = '';
-	$("#appeal")[0].value = '';
 }
 
 
@@ -228,7 +225,7 @@ function getVariants(id, csrf_token){
 
 function clearVariants(){
 	let variants = document.getElementById("variants");
-	while (variants.firstChild) {
+	while(variants.firstChild) {
 	    variants.removeChild(variants.firstChild);
 	}
 }

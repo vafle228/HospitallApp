@@ -33,6 +33,15 @@
 			{% if appointment.doctor.profession == "Кардиолог" %}
 				<img src="{% static 'user/doctors/cardiogram.svg' %}"/>
 			{% endif %}
+			{% if appointment.doctor.profession == "Психиатр" %}
+				<img src="{% static 'user/doctors/psychiatrist.svg' %}"/>
+			{% endif %}
+			{% if appointment.doctor.profession == "Невролог" %}
+				<img src="{% static 'user/doctors/neurologist.svg' %}"/>
+			{% endif %}
+			{% if appointment.doctor.profession == "Педиатр" %}
+				<img src="{% static 'user/doctors/pediatrician.svg' %}"/>
+			{% endif %}
 			<h2 class='specialist'>{{ appointment.doctor.profession }}</h2>
 		</div>
 	{% endfor %}
@@ -59,7 +68,7 @@
 		<button id='late'>Опаздываю</button>
 		<button id='cancel'>Отменить запись</button></section>
 	<section id='add-session-form' class='disactive'>
-		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_form(); form_back()">
+		<div style='display: flex; justify-content: center; margin-top: -75px' onclick="close_form();">
 			<div class='decorate'></div>
 		</div>
 		<div id='add-session-form1'>
