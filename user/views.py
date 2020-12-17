@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from login.models import Appointment, HospitalUser, Doctor
 from .insertClient import insertClient
 from .forms import AppointmentForm
+from datetime import datetime
 
 doctors = ["Офтальмолог", "Хирург", "Психиатр", "Оттолоринголог", "Стоматолог", "Невролог", "Педиатр", "Кардиолог"]
 reason = ["Заболел и пришел в первый раз", "На повторный прием", "На выписку"]
@@ -14,7 +15,8 @@ def userPage(request, identifier):
         user = User.objects.filter(pk=identifier)[0]
         if request.user == user and request.user.is_authenticated:
             hospital_user = HospitalUser.objects.filter(name=user)[0]
-            appointments = Appointment.objects.filter(client_name=hospital_user)
+            appointments = Appointment.objects.filter(client_name=hospital_user,
+                                                      appointment_date__gte=datetime.today())
 
             return render(request, 'user/index.html', {'appointments': appointments, 'id': identifier})
     return redirect('/login/')
