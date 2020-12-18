@@ -62,6 +62,7 @@ function date_build(date, month, year, day) {
 
 function next_date(id, csrf_token) {
 	date += 1; month = month; year = year; day += 1;
+	if(day == 7){ day = 0; }
 	var next_date = new Date(year, month, date);
 	date_build(next_date.getDate(), next_date.getMonth(), next_date.getFullYear(), next_date.getDay());
 	getVariants(id, csrf_token)
@@ -145,6 +146,13 @@ function createVariantsTable(variants, csrf_token, id, appeal){
 						   + doctor_name.split(' ')[1][0] + '.' 
 						   + doctor_name.split(' ')[2][0] + '.';
 
+		if(variants[doctor_name].length == 0){
+			let specialist_td = document.createElement('td');
+
+			specialist_td.innerHTML = 'Записей нет'
+			table.appendChild(specialist_td)
+		}
+
 		for(let i in variants[doctor_name]){
 			let appointment_date = variants[doctor_name][i]['date'].split('-')
 
@@ -201,9 +209,10 @@ function sendVariant(csrf_token, id, variant, appeal){
 }
 
 function getData(){
+	alert($("#date-slider")[0].innerHTML)
 	let specialist = $("#doctor")[0].value
 	let appeal = $("#appeal")[0].value
-	let appointment_date = String(year) + '-' + String(month + 1) + '-' + String(date)
+	let appointment_date = 
 
 	return [specialist, appeal, appointment_date]
 }
