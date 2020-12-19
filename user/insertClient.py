@@ -1,3 +1,6 @@
+import time as tm
+
+
 def swapToSec(str_time):
     str_time = str_time.split(':')
     return (int(str_time[0]) * 3600) + (int(str_time[1]) * 60)
@@ -37,7 +40,7 @@ def clientAppointment(waitTime, que, client_referral, doctor, date):
 
     for client in que:
         if isFreeTime(client['endTime'], swapToTime(swapToSec(client['endTime']) + waitTime), que, client_referral) \
-           and swapToSec(client['endTime']) <= 3600 * 22 and swapToSec(client['endTime']) >= 3600 * 8:
+                and 3600 * 22 >= swapToSec(client['endTime']) >= 3600 * 8:
             backup_clients.append({'time': client['endTime'],
                                    'endTime': swapToTime(swapToSec(client['endTime']) + waitTime),
                                    'doctor': doctor.pk,

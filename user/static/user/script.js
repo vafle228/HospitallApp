@@ -192,7 +192,7 @@ function createVariantsTable(variants, csrf_token, id, appeal){
 // Функция отправки данных на сервер
 function sendVariant(csrf_token, id, variant, appeal){
 	$.post({
-		url: "/main/appointment_create/" + String(id),
+		url: "/user/appointment_create/" + String(id),
 		data: {
 			specialist: variant['doctor'],
 			appeal: appeal,
@@ -218,7 +218,7 @@ function getVariants(id, csrf_token){
 	data = getData()
 	$.ajax({
 		type: "POST",
-		url: "/main/appointment_check/" + String(id),
+		url: "/user/appointment_check/" + String(id),
 		data: {
 			specialist: data[0],
 			appeal: data[1],
@@ -246,7 +246,7 @@ function cancel_session(btn1) {
 
 function deleteAppointment(appointment, id, csrf_token){
 	$.post({
-		url: "/main/appointment_delete/" + String(id),
+		url: "/user/appointment_delete/" + String(id),
 		data: {
 			appointment: appointment,
 			csrfmiddlewaretoken: csrf_token

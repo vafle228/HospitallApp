@@ -1,23 +1,23 @@
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
-from .forms import LoginUser, RegisterForm
+from .forms import LoginForm, RegisterForm
 
 
-def loginPage(request):
-    return render(request, 'login/index.html')
+def loginUserPage(request):
+    return render(request, 'login/user.html')
 
 
 def loginUser(request):
     if request.method == 'POST':
-        form = LoginUser(request.POST)
+        form = LoginForm(request.POST)
 
         if form.is_valid():
             user = form.save()
 
             if user != 'Error':
                 login(request, user)
-                return redirect(f'/main/{user.pk}')
-    return redirect('/login/')
+                return redirect(f'/user/{user.pk}')
+    return redirect('/login/user')
 
 
 def registerUser(request):
@@ -30,5 +30,22 @@ def registerUser(request):
                 user = form.save()
                 if user != 'Error':
                     login(request, user)
-                    return redirect(f'/main/{user.pk}')
-    return redirect('/login/')
+                    return redirect(f'/user/{user.pk}')
+    return redirect('/login/user')
+
+
+def loginDoctorPage(request):
+    return render(request, 'login/doctor.html')
+
+
+def loginDoctor(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+
+            if user != 'Error':
+                login(request, user)
+                return redirect(f'/doctor/{user.pk}')
+    return redirect('/login/doctor')

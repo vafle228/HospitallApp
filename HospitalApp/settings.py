@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'doctor.apps.DoctorConfig',
     'login.apps.LoginConfig',
     'user.apps.UserConfig',
     'channels',

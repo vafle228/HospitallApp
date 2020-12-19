@@ -2,7 +2,6 @@ from django import forms
 from login.models import Doctor, HospitalUser, Appointment
 
 
-# Доработать форму для комфортного создания записи
 class AppointmentForm(forms.Form):
     specialist = forms.CharField(required=True)
     date = forms.DateField(required=True)

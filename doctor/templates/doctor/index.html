@@ -1,0 +1,68 @@
+{% load static %}
+<html>
+<head>
+	<link rel="stylesheet" href="{% static 'doctor/style.css' %}" type="text/css"/>
+	<title>Главная</title>
+	<style>
+		div {
+			background: url("{% static 'doctor/account.png' %}");
+			width: 4.5vh;
+			height: 4.5vh;
+			border-radius: 50%;
+			background-size: cover;
+			transition: transform .5s;
+		}
+		#info {
+			width: 66vw;
+			height: 85vh;
+			margin-top: 5vh;
+			background: url("{% static 'doctor/mc.jpg' %}");
+			background-size: cover;
+		}
+	</style>
+</head>
+<body>
+	<img src="{% static 'doctor/logo.svg' %}" id='logo'/>
+	<header>
+		<section>
+			<button style="background: linear-gradient(to right, #F43271, #F89571)">Взять перерыв</button>
+			<button id='profile-name'>{{ current_appointment.doctor.doctor_name.name.username }}<div id='profile-img'></div></button>
+		</section>
+	</header>
+	<section id='aside-timetable'>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</section>
+	<section id='timetable'>
+		<section id='next-client'>
+			<section id='next-client-info'>
+				<div></div>
+				<p>{{ current_appointment.client_name.name.username }}<br/>{{ current_appointment.appointment_start|time:"H:i" }}<p>
+			</section>
+			<section id='controll-menu'>
+				<button style="background: linear-gradient(to right, #3EC0F3, #6699FF)">Принять</button>
+				<button style="background: linear-gradient(to right, #3EC0F3, #6699FF)">Прием окончен</button>
+				<button style="background: linear-gradient(to right, #F43271, #F89571)">Отклонить</button>
+			</section>
+		</section>
+		{% for appointment in appointments %}
+		<section class='timetable-client' onclick="">
+			<div></div>
+			<p>{{ appointment.client_name.name.username }}<br/>{{ appointment.appointment_start|time:"H:i" }}<p>
+		</section>
+		{% endfor %}
+	</section>
+	<section id='info'>
+	</section>
+</body>
+</html>

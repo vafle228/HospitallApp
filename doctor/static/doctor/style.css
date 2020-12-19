@@ -158,10 +158,3 @@ header button {
 	width: 6vh;
 	height: 6vh;
 }
-#info {
-	width: 66vw;
-	height: 85vh;
-	margin-top: 5vh;
-	background: url('mc.jpg');
-	background-size: cover;
-}

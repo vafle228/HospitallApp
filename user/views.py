@@ -13,7 +13,7 @@ reason = ["Выписка", "Прием", "Заболел"]
 
 def logoutUser(request, identifier):
     logout(request)
-    return redirect('/login/')
+    return redirect('/login/user')
 
 
 def userPage(request, identifier):
@@ -25,7 +25,7 @@ def userPage(request, identifier):
                                                       appointment_date__gte=datetime.today())
 
             return render(request, 'user/index.html', {'appointments': appointments, 'id': identifier})
-    return redirect('/login/')
+    return redirect('/login/user')
 
 
 def appointmentCheck(request, identifier):
@@ -55,8 +55,8 @@ def appointmentCreate(request, identifier):
             form = AppointmentForm(request.POST)
             if form.is_valid():
                 form.save(user)
-            return HttpResponse(f'/main/{user.pk}')
-    return HttpResponse('/login/')
+            return HttpResponse(f'/user/{user.pk}')
+    return HttpResponse('/login/user')
 
 
 def appointmentRemove(request, identifier):
@@ -65,8 +65,8 @@ def appointmentRemove(request, identifier):
         if request.method == "POST" and request.user == user and request.user.is_authenticated:
             if Appointment.objects.filter().exists():
                 Appointment.objects.filter(pk=request.POST['appointment']).delete()
-            return HttpResponse(f'/main/{user.pk}')
-    return HttpResponse('/login/')
+            return HttpResponse(f'/user/{user.pk}')
+    return HttpResponse('/login/user')
 
 
 def createQue(doctor, date):

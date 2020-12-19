@@ -5,7 +5,7 @@ from .models import HospitalUser
 from django.contrib.auth.password_validation import validate_password
 
 
-class LoginUser(forms.Form):
+class LoginForm(forms.Form):
     email = forms.EmailField(required=True)
     password = forms.CharField(required=True)
 

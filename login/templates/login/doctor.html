@@ -1,0 +1,18 @@
+{% load static %}
+<html>
+<head>
+	<link rel="stylesheet" href="{% static 'login/doctor/style.css' %}" type="text/css"/>
+	<title>Главная</title>
+</head>
+<body>
+	<div id='log-in-form'>
+		<img id='logo' src="{% static 'login/doctor/logo.svg' %}"/>
+		<form method="POST" action="{% url 'login-doctor' %}">
+			{% csrf_token %}
+			<input placeholder="Введите электронную почту" name='email' autocomplete="off"></input>
+			<input placeholder="Введите пароль" name='password' type='password'></input>
+			<button type="submit">Войти</button>
+		</form>
+	</div>
+</body>
+</html>

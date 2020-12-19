@@ -1,12 +1,12 @@
 {% load static %}
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=no">
-	<link rel="stylesheet" href="{% static 'login/style.css' %}" type="text/css"/>
+	<link rel="stylesheet" href="{% static 'login/user/style.css' %}" type="text/css"/>
 	<title>Вход</title>
 </head>
 <body>
 	<section id='logo'>
-		<img src="{% static 'login/logo.svg' %}" style='width: 50%'>
+		<img src="{% static 'login/user/logo.svg' %}" style='width: 50%'>
 	</section>
 	<h1>Добро пожаловать<br/>Войдите или зарегистрируйтесь</h1>
 	<section style='position: absolute; bottom: 8px' id='choice'>
@@ -37,5 +37,5 @@
 			<button id='reg-btn' type='submit'>Зарегистрироваться</button>
 		</form>
 	</section>
-	<script src="{% static 'login/script.js' %}"></script>
+	<script src="{% static 'login/user/script.js' %}"></script>
 </body>
