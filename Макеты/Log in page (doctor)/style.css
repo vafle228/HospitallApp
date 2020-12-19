@@ -6,6 +6,7 @@
 	box-sizing: border-box;
 	border-radius: 20px;
 	border: none;
+	outline: none;
 }
 body {
 	display: flex;
