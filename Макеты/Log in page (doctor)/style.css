@@ -6,7 +6,6 @@
 	box-sizing: border-box;
 	border-radius: 20px;
 	border: none;
-	outline: none;
 }
 body {
 	display: flex;
@@ -28,6 +27,7 @@ input {
 	margin: 10px 0;
 	padding: 0 30px;
 	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.08);
+	outline: none;
 }
 button {
 	width: 50%;
@@ -35,4 +35,5 @@ button {
 	margin: 10px 25%;
 	background: linear-gradient(to right, #3EC0F3, #6699FF);
 	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.08);
+	outline: none;
 }
