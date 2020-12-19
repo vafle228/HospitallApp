@@ -46,40 +46,36 @@ function search_fill(a) {
 }
 
 
-var now = new Date();
-var date = now.getDate();
-var month = now.getMonth();
-var year = now.getFullYear();
-var day = now.getDay()
+var date = new Date();
+
 
 // Построение и установка на слайдер даты
-function date_build(date, month, year, day) {
+function date_build(cr_date, cr_month, cr_year, cr_day) {
 	var days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
 	document.getElementById('date-slider').innerHTML = 
-	String(date) + '.' + String(month + 1) + '.' + 
-	String(year) + ' ' + days[day];
+	String(cr_date) + '.' + String(cr_month + 1) + '.' + 
+	String(cr_year) + ' ' + days[cr_day];
 }
 
 function next_date(id, csrf_token) {
-	date += 1; month = month; year = year; day += 1;
-	if(day == 7){ day = 0; }
-	var next_date = new Date(year, month, date);
-	date_build(next_date.getDate(), next_date.getMonth(), next_date.getFullYear(), next_date.getDay());
+	date.setDate(date.getDate() + 1)
+	date_build(date.getDate(), date.getMonth(), date.getFullYear(), date.getDay());
 	getVariants(id, csrf_token)
 }
 
 function previous_date(id, csrf_token) {
-	if(now.getDate() < date && now.getMonth() <= month && now.getFullYear() <= year){
-		date -= 1; month = month; year = year; day -= 1;
-		var previous_date = new Date(year, month, date);
-		date_build(previous_date.getDate(), previous_date.getMonth(), previous_date.getFullYear(), previous_date.getDay());
+	if(date.getDay() < new Date().getDay() 
+	   && date.getMonth() <= new Date().getMonth()  
+	   && date.getFullYear() <= new Date().getFullYear()){
+		date.setDate(date.getDate() - 1)
+		date_build(date.getDate(), date.getMonth(), date.getFullYear(), date.getDay());
 		getVariants(id, csrf_token)
 	}
 }
 
 // Перейти к выбору времени
 function form_show() {
-	date_build(date, month, year, day);
+	date_build(date.getDate(), date.getMonth(), date.getFullYear(), date.getDay());
 
 	document.getElementById('add-session-form1').style.display = 'none';
 	document.getElementById('add-session-btn').style.display = 'none';
@@ -131,6 +127,7 @@ function specialist_table(specialist) {
 
 // генерация html представление вариантов
 function createVariantsTable(variants, csrf_token, id, appeal){
+	if(variants == "Error"){ location.href = String(location.origin) + "/main/" + String(id) }
 	clearVariants()
 	for(let doctor_name in variants){
 		let button = document.createElement('button');
@@ -209,10 +206,9 @@ function sendVariant(csrf_token, id, variant, appeal){
 }
 
 function getData(){
-	alert($("#date-slider")[0].innerHTML)
 	let specialist = $("#doctor")[0].value
 	let appeal = $("#appeal")[0].value
-	let appointment_date = 
+	let appointment_date = date.toISOString().split('T')[0]
 
 	return [specialist, appeal, appointment_date]
 }
