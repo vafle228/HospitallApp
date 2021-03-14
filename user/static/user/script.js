@@ -64,9 +64,9 @@ function next_date(id, csrf_token) {
 }
 
 function previous_date(id, csrf_token) {
-	if(date.getDay() < new Date().getDay() 
-	   && date.getMonth() <= new Date().getMonth()  
-	   && date.getFullYear() <= new Date().getFullYear()){
+	if(date.getDay() > new Date().getDay() 
+	   && date.getMonth() >= new Date().getMonth()  
+	   && date.getFullYear() >= new Date().getFullYear()){
 		date.setDate(date.getDate() - 1)
 		date_build(date.getDate(), date.getMonth(), date.getFullYear(), date.getDay());
 		getVariants(id, csrf_token)
